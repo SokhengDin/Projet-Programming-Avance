@@ -1,0 +1,70 @@
+# Build directories
+build/
+builddir/
+bin/
+!bin/main.cpp
+
+# Meson build files
+.meson_cache/
+meson-logs/
+meson-private/
+compile_commands.json
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# CMake (if used)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Documentation build
+doc/html/
+doc/latex/
+doc/xml/
+
+# Test results
+test_results/
+*.log
+
+# Subprojects (if you want to ignore SDL2 source)
+subprojects/SDL2*/
+subprojects/package*/

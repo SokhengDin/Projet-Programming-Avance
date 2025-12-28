@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['delay_0',['delay',['../classsdl_1_1_s_d_l_core.html#a72cf07dd648be5695d5500c1459cffba',1,'sdl::SDLCore']]],
+  ['dragging_5fslider_5f_1',['dragging_slider_',['../classsdl_1_1_s_d_l_app.html#a5602e3dc07e0350e957d13f40d77f132',1,'sdl::SDLApp']]],
+  ['draw_5fbar_5f1d_2',['draw_bar_1d',['../classsdl_1_1_s_d_l_heatmap.html#af2c5abfc98b93a7715a4fa5160b5e0ff',1,'sdl::SDLHeatmap']]],
+  ['draw_5fboundary_5fmarkers_5f1d_3',['draw_boundary_markers_1d',['../classsdl_1_1_s_d_l_heatmap.html#af53ca537e4aa47d3e9d7e1fe9cd08453',1,'sdl::SDLHeatmap']]],
+  ['draw_5fboundary_5fmarkers_5f2d_4',['draw_boundary_markers_2d',['../classsdl_1_1_s_d_l_heatmap.html#aca4bad5764c96b6aef341cb1df8cf601',1,'sdl::SDLHeatmap']]],
+  ['draw_5fcolorbar_5',['draw_colorbar',['../classsdl_1_1_s_d_l_heatmap.html#a6dc94c506c9ec0fe82ac7c4c38b42ef4',1,'sdl::SDLHeatmap']]],
+  ['draw_5fheat_5fflow_5f1d_6',['draw_heat_flow_1d',['../classsdl_1_1_s_d_l_heatmap.html#a9588dd0c4370d9ae22eeab303c7490ce',1,'sdl::SDLHeatmap']]],
+  ['draw_5fheat_5fflow_5f2d_7',['draw_heat_flow_2d',['../classsdl_1_1_s_d_l_heatmap.html#aa943d3ddda2629de92d9630d6cb99f5f',1,'sdl::SDLHeatmap']]],
+  ['draw_5fheat_5fsources_5f1d_8',['draw_heat_sources_1d',['../classsdl_1_1_s_d_l_heatmap.html#a5606af5e18e5df4e82d4b1384a2a3cb4',1,'sdl::SDLHeatmap']]],
+  ['draw_5fheat_5fsources_5f2d_9',['draw_heat_sources_2d',['../classsdl_1_1_s_d_l_heatmap.html#a98a201f35b5e7e735e312b8b6e4d1da9',1,'sdl::SDLHeatmap']]],
+  ['draw_5finfo_10',['draw_info',['../classsdl_1_1_s_d_l_heatmap.html#a4e685f0c582d1285c29c35973b333cce',1,'sdl::SDLHeatmap']]],
+  ['draw_5fplate_5f2d_11',['draw_plate_2d',['../classsdl_1_1_s_d_l_heatmap.html#a93a91bb976e5495855930c1a67eae3c4',1,'sdl::SDLHeatmap']]],
+  ['draw_5frect_12',['draw_rect',['../classsdl_1_1_s_d_l_app.html#a0ff598d582a230674160720a9c074c1f',1,'sdl::SDLApp']]],
+  ['draw_5fslider_13',['draw_slider',['../classsdl_1_1_s_d_l_app.html#afb544946f1a1047306cfd6874b2affcd',1,'sdl::SDLApp']]],
+  ['draw_5fstats_14',['draw_stats',['../classsdl_1_1_s_d_l_heatmap.html#a2fe587844859b46c42388504f75310c4',1,'sdl::SDLHeatmap']]],
+  ['draw_5fstats_5f2d_15',['draw_stats_2d',['../classsdl_1_1_s_d_l_heatmap.html#a711aedc6a77645b317fc912adf1e4c5d',1,'sdl::SDLHeatmap']]],
+  ['draw_5ftext_5fbox_16',['draw_text_box',['../classsdl_1_1_s_d_l_app.html#a65d8991034a0519998a2694e626ca68c',1,'sdl::SDLApp']]],
+  ['dt_5f_17',['dt_',['../classensiie_1_1_heat_equation_solver1_d.html#aadfb152f989693b9ed262dfa5f4730e4',1,'ensiie::HeatEquationSolver1D::dt_'],['../classensiie_1_1_heat_equation_solver2_d.html#ae64d1250173160e466b48445d04d18b8',1,'ensiie::HeatEquationSolver2D::dt_']]],
+  ['dx_5f_18',['dx_',['../classensiie_1_1_heat_equation_solver1_d.html#afe0c25af5d60e6e6e302bb114899c5c9',1,'ensiie::HeatEquationSolver1D::dx_'],['../classensiie_1_1_heat_equation_solver2_d.html#a65f86ab0ca3fe56391b1223480aa5551',1,'ensiie::HeatEquationSolver2D::dx_']]]
+];
