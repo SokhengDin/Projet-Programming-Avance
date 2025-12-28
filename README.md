@@ -200,3 +200,14 @@ The simulation window will open showing the heat diffusion visualization.
 ## License
 
 This project is part of an academic assignment at ENSIIE.
+
+## References
+
+- Tridiagonal Matrix Algorithm (Thomas Algorithm)  
+  https://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm
+
+- Gauss–Seidel Method  
+  https://en.wikipedia.org/wiki/Gauss%E2%80%93Seidel_method
+
+- Finite Difference Method  
+  https://en.wikipedia.org/wiki/Finite_difference_method
