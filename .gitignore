@@ -56,11 +56,6 @@ Makefile
 *.idb
 *.pdb
 
-# Documentation build
-doc/html/
-doc/latex/
-doc/xml/
-
 # Test results
 test_results/
 *.log
