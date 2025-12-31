@@ -61,7 +61,8 @@ namespace ensiie {
         // Thermal diffusion alpha = lambda / (rho * c)
         double alpha = mat_.alpha();
 
-        // Rate condutivity r = alpha * delta_t / delta_x
+        // Rate condutivity r = alpha * delta_t / (delta_x^2)
+
         double r     = alpha * dt_ / (dx_ * dx_);
 
         // Coefficient
@@ -88,8 +89,10 @@ namespace ensiie {
         // Boundary conditions
 
         /// Neumann conditions
-        b[0] = 1.0 + r;
-        c[0] = -r;
+        b[0] = 1.0;
+        c[0] = -1.0;
+        d[0] = 0.0;
+
 
         /// Dirchlet conditions
         b[n_ - 1] = 1.0;
