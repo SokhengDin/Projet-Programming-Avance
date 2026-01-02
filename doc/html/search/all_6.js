@@ -12,5 +12,6 @@ var searchData=
   ['get_5ftmax_9',['get_tmax',['../classensiie_1_1_heat_equation_solver2_d.html#aa1beae7f46cc63165a7d2b3b3c649b48',1,'ensiie::HeatEquationSolver2D']]],
   ['get_5fwidth_10',['get_width',['../classsdl_1_1_s_d_l_window.html#a7ac302f648f5a116a86ce252c5d510f9',1,'sdl::SDLWindow']]],
   ['get_5fwindow_11',['get_window',['../classsdl_1_1_s_d_l_window.html#a7adaa54893929ca191d8a8ed995f7e2d',1,'sdl::SDLWindow']]],
-  ['glass_12',['GLASS',['../namespaceensiie_1_1_materials.html#a92781b22cd7edccd03cb0369fa65b939',1,'ensiie::Materials']]]
+  ['glass_12',['GLASS',['../namespaceensiie_1_1_materials.html#a92781b22cd7edccd03cb0369fa65b939',1,'ensiie::Materials']]],
+  ['grid_5fmode_5f_13',['grid_mode_',['../classsdl_1_1_s_d_l_app.html#aa912e6e3c85d38030e175619406d052c',1,'sdl::SDLApp']]]
 ];

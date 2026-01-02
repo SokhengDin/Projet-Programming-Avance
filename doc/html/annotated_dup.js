@@ -9,6 +9,7 @@ var annotated_dup =
       [ "SDLApp", "classsdl_1_1_s_d_l_app.html", "classsdl_1_1_s_d_l_app" ],
       [ "SDLException", "classsdl_1_1_s_d_l_exception.html", "classsdl_1_1_s_d_l_exception" ],
       [ "SDLCore", "classsdl_1_1_s_d_l_core.html", "classsdl_1_1_s_d_l_core" ],
+      [ "SimInfo", "structsdl_1_1_sim_info.html", "structsdl_1_1_sim_info" ],
       [ "SDLHeatmap", "classsdl_1_1_s_d_l_heatmap.html", "classsdl_1_1_s_d_l_heatmap" ],
       [ "SDLWindow", "classsdl_1_1_s_d_l_window.html", "classsdl_1_1_s_d_l_window" ]
     ] ]

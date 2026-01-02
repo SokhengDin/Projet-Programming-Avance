@@ -161,16 +161,20 @@ void SDLApp::render_grid() {
     int cell_x[4] = {0, cell_w, 0, cell_w};
     int cell_y[4] = {0, 0, cell_h, cell_h};
 
-    // Find global min/max temperature 
-    double global_min = 1e9, global_max = -1e9;
+    // Reference temperature for ΔT calculation
+    double u0_kelvin = u0_ + 273.15;
+
+    // Find global min/max ΔT (temperature increase from u0)
+    double global_min = 0.0;  // ΔT minimum is 0 (no heating)
+    double global_max = 0.0;
 
     if (sim_type_ == SimType::BAR_1D) {
         for (int i = 0; i < 4; i++) {
             if (solvers_1d_[i]) {
                 auto temps = solvers_1d_[i]->get_temperature();
                 for (double t : temps) {
-                    global_min = std::min(global_min, t);
-                    global_max = std::max(global_max, t);
+                    double delta_t = t - u0_kelvin;
+                    global_max = std::max(global_max, delta_t);
                 }
             }
         }
@@ -180,17 +184,18 @@ void SDLApp::render_grid() {
                 auto temps = solvers_2d_[i]->get_temperature_2d();
                 for (const auto& row : temps) {
                     for (double t : row) {
-                        global_min = std::min(global_min, t);
-                        global_max = std::max(global_max, t);
+                        double delta_t = t - u0_kelvin;
+                        global_max = std::max(global_max, delta_t);
                     }
                 }
             }
         }
     }
 
-    // Add margin to range
-    double margin = (global_max - global_min) * 0.05;
-    heatmap_->set_range(global_min - margin, global_max + margin);
+    // Set range for ΔT: 0 to max with small margin
+    double margin = global_max * 0.05;
+    if (global_max < 0.1) global_max = 1.0;  // Minimum range for visibility
+    heatmap_->set_range(global_min, global_max + margin);
 
     // Render each material in its cell
     for (int i = 0; i < 4; i++) {
@@ -199,7 +204,7 @@ void SDLApp::render_grid() {
         info.alpha = materials_[i].alpha();
         info.L = L_;
         info.tmax = tmax_;
-        info.u0 = u0_ + 273.15;
+        info.u0 = u0_kelvin;
         info.speed = speed_;
         info.paused = paused_;
 
@@ -207,13 +212,26 @@ void SDLApp::render_grid() {
             info.time = solvers_1d_[i]->get_time();
             auto temps = solvers_1d_[i]->get_temperature();
             if (!temps.empty()) {
-                heatmap_->draw_1d_cell(temps, info, cell_x[i], cell_y[i], cell_w, cell_h);
+                // Convert to ΔT
+                std::vector<double> delta_temps(temps.size());
+                for (size_t j = 0; j < temps.size(); j++) {
+                    delta_temps[j] = temps[j] - u0_kelvin;
+                }
+                heatmap_->draw_1d_cell(delta_temps, info, cell_x[i], cell_y[i], cell_w, cell_h);
             }
         } else if (sim_type_ == SimType::PLATE_2D && solvers_2d_[i]) {
             info.time = solvers_2d_[i]->get_time();
             auto temps = solvers_2d_[i]->get_temperature_2d();
             if (!temps.empty() && !temps[0].empty()) {
-                heatmap_->draw_2d_cell(temps, info, cell_x[i], cell_y[i], cell_w, cell_h);
+                // Convert to ΔT
+                std::vector<std::vector<double>> delta_temps(temps.size());
+                for (size_t j = 0; j < temps.size(); j++) {
+                    delta_temps[j].resize(temps[j].size());
+                    for (size_t k = 0; k < temps[j].size(); k++) {
+                        delta_temps[j][k] = temps[j][k] - u0_kelvin;
+                    }
+                }
+                heatmap_->draw_2d_cell(delta_temps, info, cell_x[i], cell_y[i], cell_w, cell_h);
             }
         }
     }

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['dt_5f_0',['dt_',['../classensiie_1_1_heat_equation_solver1_d.html#aadfb152f989693b9ed262dfa5f4730e4',1,'ensiie::HeatEquationSolver1D::dt_'],['../classensiie_1_1_heat_equation_solver2_d.html#ae64d1250173160e466b48445d04d18b8',1,'ensiie::HeatEquationSolver2D::dt_']]],
-  ['dx_5f_1',['dx_',['../classensiie_1_1_heat_equation_solver1_d.html#afe0c25af5d60e6e6e302bb114899c5c9',1,'ensiie::HeatEquationSolver1D::dx_'],['../classensiie_1_1_heat_equation_solver2_d.html#a65f86ab0ca3fe56391b1223480aa5551',1,'ensiie::HeatEquationSolver2D::dx_']]]
+  ['c_0',['c',['../structensiie_1_1_material.html#affafa7c4747b894f313055b02b8268be',1,'ensiie::Material']]],
+  ['copper_1',['COPPER',['../namespaceensiie_1_1_materials.html#ab17bd13223ed4e283979e003d1fbedc7',1,'ensiie::Materials']]]
 ];

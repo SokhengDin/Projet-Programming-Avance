@@ -1,0 +1,13 @@
+<map id="ensiie::HeatEquationSolver2D::idx" name="ensiie::HeatEquationSolver2D::idx">
+<area shape="rect" id="Node000001" title=" " alt="" coords="474,104,660,145"/>
+<area shape="rect" id="Node000002" href="$classensiie_1_1_heat_equation_solver2_d.html#ae53760074d980075c055f809ecee7c9c" title=" " alt="" coords="240,5,426,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="508,97,425,61,394,49,394,44,427,57,513,97"/>
+<area shape="rect" id="Node000003" href="$classensiie_1_1_heat_equation_solver2_d.html#a0825a8b9747c4b9f11f75e4a7e8dbbc3" title=" " alt="" coords="240,71,426,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="456,109,427,107,426,102,461,109"/>
+<area shape="rect" id="Node000004" href="$classensiie_1_1_heat_equation_solver2_d.html#a7bb7fd4d1f7df9652c476ee141e04fd1" title=" " alt="" coords="240,136,426,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="456,140,427,146,426,141,461,139"/>
+<area shape="rect" id="Node000006" href="$classensiie_1_1_heat_equation_solver2_d.html#ab2ad6b063f5e627b0c80beff7fb2af7d" title=" " alt="" coords="240,201,426,242"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="512,151,427,191,394,203,393,198,425,186,506,152"/>
+<area shape="rect" id="Node000005" href="$classensiie_1_1_heat_equation_solver2_d.html#a35849ebb0dc4b3fcb1b672a6aa8daecd" title=" " alt="" coords="5,136,192,177"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="222,157,193,159,192,154,227,156"/>
+</map>

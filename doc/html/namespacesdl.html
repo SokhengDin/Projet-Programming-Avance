@@ -106,15 +106,121 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heat simulation with fullscreen visualization.  <a href="classsdl_1_1_s_d_l_app.html#details">More...</a><br /></td></tr>
 <tr class="memitem:SDLException" id="r_SDLException"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsdl_1_1_s_d_l_exception.html">SDLException</a></td></tr>
 <tr class="memitem:SDLCore" id="r_SDLCore"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsdl_1_1_s_d_l_core.html">SDLCore</a></td></tr>
+<tr class="memitem:SimInfo" id="r_SimInfo"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsdl_1_1_sim_info.html">SimInfo</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runtime simulation metadata for display.  <a href="structsdl_1_1_sim_info.html#details">More...</a><br /></td></tr>
 <tr class="memitem:SDLHeatmap" id="r_SDLHeatmap"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsdl_1_1_s_d_l_heatmap.html">SDLHeatmap</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fullscreen temperature visualization.  <a href="classsdl_1_1_s_d_l_heatmap.html#details">More...</a><br /></td></tr>
 <tr class="memitem:SDLWindow" id="r_SDLWindow"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsdl_1_1_s_d_l_window.html">SDLWindow</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aa3e8187f011be2af6cdd67f41fca97d6" id="r_aa3e8187f011be2af6cdd67f41fca97d6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa3e8187f011be2af6cdd67f41fca97d6">draw_digit</a> (SDL_Renderer *rend, int x, int y, int digit)</td></tr>
+<tr class="memitem:af1063550d176be4c42d353aaad43c27a" id="r_af1063550d176be4c42d353aaad43c27a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af1063550d176be4c42d353aaad43c27a">draw_letter</a> (SDL_Renderer *rend, int x, int y, char c)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a8446c59b821e2dcac961b8ed575f73c4" id="r_a8446c59b821e2dcac961b8ed575f73c4"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8446c59b821e2dcac961b8ed575f73c4">INFERNO_SIZE</a> = 256</td></tr>
 <tr class="memitem:aeb0d16bddeafb2618ea4e8426ff7e05f" id="r_aeb0d16bddeafb2618ea4e8426ff7e05f"><td class="memItemLeft" align="right" valign="top">static const unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb0d16bddeafb2618ea4e8426ff7e05f">INFERNO_MAP</a> [256][3]</td></tr>
 </table>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="aa3e8187f011be2af6cdd67f41fca97d6" name="aa3e8187f011be2af6cdd67f41fca97d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3e8187f011be2af6cdd67f41fca97d6">&#9670;&#160;</a></span>draw_digit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sdl::draw_digit </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *</td>          <td class="paramname"><span class="paramname"><em>rend</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>digit</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl__heatmap_8cpp_source.html#l00013">13</a> of file <a class="el" href="sdl__heatmap_8cpp_source.html">sdl_heatmap.cpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sdl__heatmap_8cpp_source.html#l00250">sdl::SDLHeatmap::draw_number()</a>, and <a class="el" href="sdl__heatmap_8cpp_source.html#l00273">sdl::SDLHeatmap::draw_text()</a>.</p>
+<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacesdl_aa3e8187f011be2af6cdd67f41fca97d6_icgraph.svg" width="774" height="408"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="af1063550d176be4c42d353aaad43c27a" name="af1063550d176be4c42d353aaad43c27a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1063550d176be4c42d353aaad43c27a">&#9670;&#160;</a></span>draw_letter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sdl::draw_letter </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *</td>          <td class="paramname"><span class="paramname"><em>rend</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>c</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="sdl__heatmap_8cpp_source.html#l00040">40</a> of file <a class="el" href="sdl__heatmap_8cpp_source.html">sdl_heatmap.cpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="sdl__heatmap_8cpp_source.html#l00273">sdl::SDLHeatmap::draw_text()</a>.</p>
+<div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;"><span class="dynarrow"><span class="arrowhead closed"></span></span>Here is the caller graph for this function:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacesdl_af1063550d176be4c42d353aaad43c27a_icgraph.svg" width="779" height="262"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="aeb0d16bddeafb2618ea4e8426ff7e05f" name="aeb0d16bddeafb2618ea4e8426ff7e05f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeb0d16bddeafb2618ea4e8426ff7e05f">&#9670;&#160;</a></span>INFERNO_MAP</h2>
@@ -136,9 +242,9 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl__heatmap_8cpp_source.html#l00053">53</a> of file <a class="el" href="sdl__heatmap_8cpp_source.html">sdl_heatmap.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl__heatmap_8cpp_source.html#l00200">200</a> of file <a class="el" href="sdl__heatmap_8cpp_source.html">sdl_heatmap.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sdl__heatmap_8cpp_source.html#l00088">sdl::SDLHeatmap::temp_to_rgb()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sdl__heatmap_8cpp_source.html#l00235">sdl::SDLHeatmap::temp_to_rgb()</a>.</p>
 
 </div>
 </div>
@@ -162,9 +268,9 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sdl__heatmap_8cpp_source.html#l00052">52</a> of file <a class="el" href="sdl__heatmap_8cpp_source.html">sdl_heatmap.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sdl__heatmap_8cpp_source.html#l00199">199</a> of file <a class="el" href="sdl__heatmap_8cpp_source.html">sdl_heatmap.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sdl__heatmap_8cpp_source.html#l00088">sdl::SDLHeatmap::temp_to_rgb()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sdl__heatmap_8cpp_source.html#l00235">sdl::SDLHeatmap::temp_to_rgb()</a>.</p>
 
 </div>
 </div>

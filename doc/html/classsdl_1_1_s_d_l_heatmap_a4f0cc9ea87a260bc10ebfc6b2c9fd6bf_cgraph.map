@@ -1,0 +1,14 @@
+<map id="sdl::SDLHeatmap::draw_2d_cell" name="sdl::SDLHeatmap::draw_2d_cell">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,63,167,103"/>
+<area shape="rect" id="Node000002" href="$classsdl_1_1_s_d_l_heatmap.html#a0b9fb36b9fafa26b4ba4725b8d985cd9" title=" " alt="" coords="229,5,390,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="166,60,216,49,212,51,168,65"/>
+<area shape="rect" id="Node000004" href="$classsdl_1_1_s_d_l_heatmap.html#ac4eb50b210494fc3432db40a0071ceed" title=" " alt="" coords="215,70,405,96"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="167,80,202,82,196,84,168,86"/>
+<area shape="rect" id="Node000006" href="$classsdl_1_1_s_d_l_heatmap.html#a9b8e84cb883ff4143a80c670712a3f62" title=" " alt="" coords="229,120,391,161"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="167,101,216,115,211,116,167,106"/>
+<area shape="rect" id="Node000003" href="$namespacesdl.html#aa3e8187f011be2af6cdd67f41fca97d6" title=" " alt="" coords="456,17,561,42"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="390,25,443,28,438,29,391,30"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="361,67,404,55,441,48,446,46,406,60,362,72"/>
+<area shape="rect" id="Node000005" href="$namespacesdl.html#af1063550d176be4c42d353aaad43c27a" title=" " alt="" coords="453,70,563,96"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="405,80,440,83,435,83,406,86"/>
+</map>

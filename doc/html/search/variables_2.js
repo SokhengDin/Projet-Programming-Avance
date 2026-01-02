@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['f_5f_0',['F_',['../classensiie_1_1_heat_equation_solver1_d.html#ae918e5b637605f9f69dfea1a7c1599dc',1,'ensiie::HeatEquationSolver1D::F_'],['../classensiie_1_1_heat_equation_solver2_d.html#aacf5a442c0c03ffcc9e0256b501a0579',1,'ensiie::HeatEquationSolver2D::F_']]],
-  ['f_5f_1',['f_',['../classsdl_1_1_s_d_l_app.html#afc1b206a5f8a95d203758904173d46b0',1,'sdl::SDLApp']]],
-  ['fullscreen_5f_2',['fullscreen_',['../classsdl_1_1_s_d_l_window.html#a9effabe7468c9a951cc323a6863eeb5a',1,'sdl::SDLWindow']]]
+  ['dt_5f_0',['dt_',['../classensiie_1_1_heat_equation_solver1_d.html#aadfb152f989693b9ed262dfa5f4730e4',1,'ensiie::HeatEquationSolver1D::dt_'],['../classensiie_1_1_heat_equation_solver2_d.html#ae64d1250173160e466b48445d04d18b8',1,'ensiie::HeatEquationSolver2D::dt_']]],
+  ['dx_5f_1',['dx_',['../classensiie_1_1_heat_equation_solver1_d.html#afe0c25af5d60e6e6e302bb114899c5c9',1,'ensiie::HeatEquationSolver1D::dx_'],['../classensiie_1_1_heat_equation_solver2_d.html#a65f86ab0ca3fe56391b1223480aa5551',1,'ensiie::HeatEquationSolver2D::dx_']]]
 ];

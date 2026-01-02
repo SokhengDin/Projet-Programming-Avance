@@ -1,0 +1,11 @@
+<map id="heat_equation_solver.hpp" name="heat_equation_solver.hpp">
+<area shape="rect" id="Node000001" title="1D and 2D Heat Equation Solvers &#45; Implicit Finite Differences" alt="" coords="81,5,250,31"/>
+<area shape="rect" id="Node000002" href="$heat__equation__solver_8cpp.html" title="Implementation of 1D/2D heat equation solvers." alt="" coords="5,79,174,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,44,104,81,100,77,143,40"/>
+<area shape="rect" id="Node000003" href="$sdl__app_8hpp.html" title="SDL2 application for heat equation visualization." alt="" coords="197,79,288,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="191,39,233,78,227,79,189,44"/>
+<area shape="rect" id="Node000004" href="$main_8cpp.html" title="Console menu and SDL2 visualization launcher." alt="" coords="152,153,227,178"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="227,116,200,154,197,150,222,118"/>
+<area shape="rect" id="Node000005" href="$sdl__app_8cpp.html" title="SDL2 application implementation." alt="" coords="250,153,342,178"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="262,115,290,153,285,151,260,119"/>
+</map>

@@ -1,0 +1,308 @@
+@startuml Heat_Equation_Simulation_UML
+
+!define ENTITY class
+!define EXCEPTION class
+
+' Title and styling
+title Heat Equation Simulation - Class Diagram
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FEFEFE
+skinparam class {
+    BackgroundColor<<struct>> LightYellow
+    BorderColor<<struct>> Orange
+    BackgroundColor<<exception>> LightPink
+    BorderColor<<exception>> Red
+    BackgroundColor Wheat
+    BorderColor Brown
+    ArrowColor DarkSlateGray
+}
+
+package "ensiie::Materials" <<Namespace>> {
+    struct Material <<struct>> {
+        + name: string
+        + lambda: double
+        + rho: double
+        + c: double
+        --
+        + alpha(): double
+    }
+
+    note right of Material
+        Physical properties:
+        - lambda: Thermal conductivity W/(m·K)
+        - rho: Density kg/m³
+        - c: Specific heat J/(kg·K)
+        - alpha: Thermal diffusivity m²/s
+
+        Predefined constants:
+        - COPPER
+        - IRON
+        - GLASS
+        - POLYSTYRENE
+    end note
+}
+
+package "ensiie::Solvers" <<Namespace>> {
+    class HeatEquationSolver1D {
+        - mat_: Material
+        - L_: double
+        - tmax_: double
+        - dx_: double
+        - dt_: double
+        - u0_kelvin_: double
+        - t_: double
+        - n_: int
+        - u_: vector<double>
+        - F_: vector<double>
+        --
+        - init_source(f: double): void
+        - solve_tridiagonal(...): void
+        ==
+        + HeatEquationSolver1D(mat, L, tmax, u0, f, n)
+        + step(): bool
+        + get_temperature(): vector<double>
+        + get_time(): double
+        + get_n(): int
+        + reset(): void
+    }
+
+    class HeatEquationSolver2D {
+        - mat_: Material
+        - L_: double
+        - tmax_: double
+        - dx_: double
+        - dt_: double
+        - u0_kelvin_: double
+        - t_: double
+        - n_: int
+        - u_: vector<double>
+        - F_: vector<double>
+        --
+        - idx(i: int, j: int): int
+        - init_source(f: double): void
+        ==
+        + HeatEquationSolver2D(mat, L, tmax, u0, f, n)
+        + step(): bool
+        + get_temperature(i, j): double
+        + get_temperature_2d(): vector<vector<double>>
+        + get_time(): double
+        + get_tmax(): double
+        + get_n(): int
+        + reset(): void
+    }
+
+    note right of HeatEquationSolver1D
+        Solves: ∂u/∂t = α∇²u + F/(ρc)
+        Method: Backward Euler (implicit)
+        Algorithm: Thomas algorithm O(n)
+
+        Boundary Conditions:
+        - x=0: Neumann (∂u/∂n=0)
+        - x=L: Dirichlet (u=u₀)
+    end note
+
+    note right of HeatEquationSolver2D
+        Solves: ∂u/∂t = α∇²u + F/(ρc)
+        Method: Backward Euler (implicit)
+        Algorithm: Gauss-Seidel iteration
+
+        Boundary Conditions:
+        - x=0, y=0: Neumann (∂u/∂n=0)
+        - x=L, y=L: Dirichlet (u=u₀)
+    end note
+}
+
+package "sdl::Core" <<Namespace>> {
+    class SDLException <<exception>> {
+        + SDLException(msg: string)
+    }
+
+    class SDLCore {
+        - {static} initialized_: bool
+        ==
+        + {static} init(flag: Uint32): void
+        + {static} quit(): void
+        + {static} poll_quit(): bool
+        + {static} delay(ms: Uint32): void
+        + {static} is_initialized(): bool
+    }
+
+    SDLException -up-|> runtime_error
+}
+
+package "sdl::Window" <<Namespace>> {
+    class SDLWindow {
+        - window_: SDL_Window*
+        - renderer_: SDL_Renderer*
+        - width_: int
+        - height_: int
+        - fullscreen_: bool
+        ==
+        + SDLWindow(title, width, height, fullscreen)
+        + ~SDLWindow()
+        + clear(r, g, b): void
+        + present(): void
+        + set_title(title): void
+        + toggle_fullscreen(): void
+        + is_fullscreen(): bool
+        + get_window(): SDL_Window*
+        + get_renderer(): SDL_Renderer*
+        + get_width(): int
+        + get_height(): int
+    }
+
+    note right of SDLWindow
+        Non-copyable wrapper
+        for SDL2 window & renderer
+
+        Manages:
+        - Window creation/destruction
+        - Renderer initialization
+        - Fullscreen toggle
+    end note
+}
+
+package "sdl::Visualization" <<Namespace>> {
+    struct SimInfo <<struct>> {
+        + material_name: string
+        + alpha: double
+        + time: double
+        + tmax: double
+        + L: double
+        + u0: double
+        + speed: int
+        + paused: bool
+    }
+
+    class SDLHeatmap {
+        - win_: SDLWindow&
+        - t_min_: double
+        - t_max_: double
+        --
+        - temp_to_rgb(t, r, g, b): void
+        - draw_number(rend, x, y, value): void
+        - draw_text(rend, x, y, text): void
+        - draw_colorbar(rend, x, y, w, h): void
+        - draw_info_panel(rend, info): void
+        - draw_grid(rend, x0, y0, w, h, nx, ny): void
+        ==
+        + SDLHeatmap(win, t_min, t_max)
+        + set_range(t_min, t_max): void
+        + auto_range(temps): void
+        + auto_range_2d(temps): void
+        + draw_1d_fullscreen(temps, info): void
+        + draw_2d_fullscreen(temps, info): void
+        + draw_1d_cell(temps, info, cell_x, cell_y, cell_w, cell_h): void
+        + draw_2d_cell(temps, info, cell_x, cell_y, cell_w, cell_h): void
+        + get_min(): double
+        + get_max(): double
+    }
+
+    note right of SDLHeatmap
+        Visualization Features:
+        - Inferno colormap (perceptually uniform)
+        - Bilinear interpolation for 2D
+        - Heat flow arrows (-∇T)
+        - Contour lines
+        - Temperature projections
+        - Heat source markers
+        - Grid mode (2x2 all materials)
+    end note
+}
+
+package "sdl::Application" <<Namespace>> {
+    enum SimType {
+        BAR_1D
+        PLATE_2D
+    }
+
+    class SDLApp {
+        - window_: unique_ptr<SDLWindow>
+        - heatmap_: unique_ptr<SDLHeatmap>
+        - solver_1d_: unique_ptr<HeatEquationSolver1D>
+        - solver_2d_: unique_ptr<HeatEquationSolver2D>
+        - sim_type_: SimType
+        - material_: Material
+        - L_: double
+        - tmax_: double
+        - u0_: double
+        - f_: double
+        - n_: int
+        - paused_: bool
+        - speed_: int
+        - running_: bool
+        - grid_mode_: bool
+        - solvers_1d_[4]: unique_ptr<HeatEquationSolver1D>
+        - solvers_2d_[4]: unique_ptr<HeatEquationSolver2D>
+        - materials_[4]: Material
+        --
+        - render(): void
+        - render_grid(): void
+        - process_events(event): void
+        - start_simulation(): void
+        - start_grid_simulation(): void
+        ==
+        + SDLApp(type, mat, L, tmax, u0, f)
+        + SDLApp(type, L, tmax, u0, f)
+        + run(): void
+    }
+
+    note right of SDLApp
+        Application Controller
+
+        Two modes:
+        1. Single material
+        2. Grid mode (2x2, all 4 materials)
+
+        Controls:
+        - SPACE: pause/resume
+        - R: reset simulation
+        - UP/DOWN: speed control
+        - ESC: quit
+    end note
+}
+
+' Relationships - Composition and Aggregation
+HeatEquationSolver1D *-- Material : uses
+HeatEquationSolver2D *-- Material : uses
+
+SDLApp *-- "1" SDLWindow : owns
+SDLApp *-- "1" SDLHeatmap : owns
+SDLApp *-- "0..1" HeatEquationSolver1D : owns
+SDLApp *-- "0..1" HeatEquationSolver2D : owns
+SDLApp *-- "4" Material : grid_mode
+
+SDLApp o-- "4" HeatEquationSolver1D : grid_mode
+SDLApp o-- "4" HeatEquationSolver2D : grid_mode
+
+SDLHeatmap o-- SDLWindow : uses
+SDLHeatmap ..> SimInfo : uses
+
+' Dependencies
+SDLApp ..> SDLCore : uses
+SDLApp ..> SimType : uses
+SDLWindow ..> SDLException : throws
+SDLCore ..> SDLException : throws
+
+' Main function dependencies (dotted)
+note as MainNote
+    <b>main.cpp</b>
+
+    Entry point that provides:
+    - Console menu interface
+    - Material selection
+    - Parameter configuration
+    - Simulation launcher
+
+    Flow:
+    1. Select simulation type (1D/2D/Grid)
+    2. Select material(s)
+    3. Configure parameters (L, tmax, u0, f)
+    4. Launch SDL application
+end note
+
+MainNote ..> SDLApp : creates
+MainNote ..> SDLCore : initializes
+MainNote ..> Material : selects
+
+@enduml

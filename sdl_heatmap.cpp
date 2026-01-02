@@ -316,7 +316,7 @@ void SDLHeatmap::draw_text(SDL_Renderer* rend, int x, int y, const char* text) c
     }
 }
 
-// Colorbar: vertical gradient showing temperature scale
+// Colorbar: vertical gradient showing ΔT scale
 void SDLHeatmap::draw_colorbar(SDL_Renderer* rend, int x, int y, int w, int h) const {
     // Draw gradient
     for (int i = 0; i < h; ++i) {
@@ -332,7 +332,7 @@ void SDLHeatmap::draw_colorbar(SDL_Renderer* rend, int x, int y, int w, int h) c
     SDL_Rect border = {x - 1, y - 1, w + 2, h + 2};
     SDL_RenderDrawRect(rend, &border);
 
-    // Temperature labels
+    // ΔT labels
     int num_labels = 5;
     for (int i = 0; i <= num_labels; ++i) {
         int ly = y + (i * h) / num_labels;
@@ -340,6 +340,10 @@ void SDLHeatmap::draw_colorbar(SDL_Renderer* rend, int x, int y, int w, int h) c
         SDL_RenderDrawLine(rend, x + w, ly, x + w + 3, ly);
         draw_number(rend, x + w + 5, ly - 5, temp);
     }
+
+    // Label: ΔT [K]
+    SDL_SetRenderDrawColor(rend, 200, 200, 200, 255);
+    draw_text(rend, x - 5, y - 15, "DT [K]");
 }
 
 // Info panel: material, time, status, speed
@@ -931,9 +935,9 @@ void SDLHeatmap::draw_1d_cell(const std::vector<double>& temps, const SimInfo& i
     draw_number(rend, plot_x - 5, plot_y + plot_h + 5, 0.0);
     draw_number(rend, plot_x + plot_w - 15, plot_y + plot_h + 5, info.L);
 
-    // Y-axis label "U [K]" for temperature
+    // Y-axis label "ΔT [K]" for temperature increase
     SDL_SetRenderDrawColor(rend, 180, 180, 180, 255);
-    draw_text(rend, plot_x - 45, plot_y + plot_h / 2 - 5, "U[K]");
+    draw_text(rend, plot_x - 45, plot_y + plot_h / 2 - 5, "DT[K]");
 
     // Y-axis labels (temp range)
     SDL_SetRenderDrawColor(rend, 200, 200, 200, 255);
@@ -1343,12 +1347,12 @@ void SDLHeatmap::draw_2d_cell(const std::vector<std::vector<double>>& temps, con
     draw_number(rend, plot_x - 30, plot_y + plot_h - 8, 0.0);
     draw_number(rend, plot_x - 30, plot_y - 3, info.L);
 
-    // Axis labels with U for temperature (colorbar)
+    // Axis labels with ΔT for temperature increase (colorbar)
     SDL_SetRenderDrawColor(rend, 180, 180, 180, 255);
     draw_text(rend, plot_x + plot_w / 2 - 10, plot_y + plot_h + 25, "X[M]");
     draw_text(rend, plot_x - 30, plot_y + plot_h / 2 - 5, "Y");
-    // U label next to colorbar
-    draw_text(rend, cb_x - 5, plot_y - 12, "U[K]");
+    // ΔT label next to colorbar
+    draw_text(rend, cb_x - 10, plot_y - 12, "DT[K]");
 
     // Boundary condition labels
     SDL_SetRenderDrawColor(rend, 150, 255, 150, 255);

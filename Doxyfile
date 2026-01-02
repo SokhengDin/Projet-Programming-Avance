@@ -98,11 +98,20 @@ EXPAND_ONLY_PREDEF     = NO
 # Diagram options
 #---------------------------------------------------------------------------
 
-HAVE_DOT               = NO
-CLASS_DIAGRAMS         = YES
-COLLABORATION_GRAPH    = NO
-INCLUDE_GRAPH          = NO
-INCLUDED_BY_GRAPH      = NO
+HAVE_DOT               = YES
+DOT_IMAGE_FORMAT       = svg
+DOT_TRANSPARENT        = YES
+DOT_GRAPH_MAX_NODES    = 100
+
+UML_LOOK               = YES
+CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = YES
+INCLUDE_GRAPH          = YES
+INCLUDED_BY_GRAPH      = YES
+
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+
 
 #---------------------------------------------------------------------------
 # Warnings

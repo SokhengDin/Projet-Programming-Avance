@@ -1,0 +1,7 @@
+<map id="sdl::SDLHeatmap::draw_text" name="sdl::SDLHeatmap::draw_text">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,196,56"/>
+<area shape="rect" id="Node000002" href="$namespacesdl.html#aa3e8187f011be2af6cdd67f41fca97d6" title=" " alt="" coords="246,5,352,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="196,29,233,26,228,27,197,34"/>
+<area shape="rect" id="Node000003" href="$namespacesdl.html#af1063550d176be4c42d353aaad43c27a" title=" " alt="" coords="244,55,354,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="196,52,231,59,226,59,196,58"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="ensiie::HeatEquationSolver2D" name="ensiie::HeatEquationSolver2D">
+<area shape="rect" id="Node000001" title="2D heat equation solver" alt="" coords="5,204,191,616"/>
+<area shape="rect" id="Node000002" href="$structensiie_1_1_material.html" title="Physical properties of materials for heat simulation." alt="" coords="49,5,148,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,130,101,187,96,186,98,135"/>
+</map>

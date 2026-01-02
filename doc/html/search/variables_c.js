@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['sim_5ftype_5f_0',['sim_type_',['../classsdl_1_1_s_d_l_app.html#af1c6983c8cfd3aa0b22b26b204afe508',1,'sdl::SDLApp']]],
-  ['solver_5f1d_5f_1',['solver_1d_',['../classsdl_1_1_s_d_l_app.html#aeba937efaff8061f4ee048849a99b3c9',1,'sdl::SDLApp']]],
-  ['solver_5f2d_5f_2',['solver_2d_',['../classsdl_1_1_s_d_l_app.html#ad2fc87a07d6fc467d8bde616d72685e2',1,'sdl::SDLApp']]],
-  ['speed_5f_3',['speed_',['../classsdl_1_1_s_d_l_app.html#a5548f03daf73607ebbf780b4c9197690',1,'sdl::SDLApp']]]
+  ['renderer_5f_0',['renderer_',['../classsdl_1_1_s_d_l_window.html#a654e951ae22298d9c24f8631476ee634',1,'sdl::SDLWindow']]],
+  ['rho_1',['rho',['../structensiie_1_1_material.html#a2baf54dfb9906f21d50ec1e46e25ac9a',1,'ensiie::Material']]],
+  ['running_5f_2',['running_',['../classsdl_1_1_s_d_l_app.html#a7b76926485a2a1b11c16f48b57b8f286',1,'sdl::SDLApp']]]
 ];

@@ -1,0 +1,9 @@
+<map id="sdl::SDLHeatmap::draw_info_panel" name="sdl::SDLHeatmap::draw_info_panel">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,23,167,64"/>
+<area shape="rect" id="Node000002" href="$classsdl_1_1_s_d_l_heatmap.html#ac4eb50b210494fc3432db40a0071ceed" title=" " alt="" coords="215,31,405,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,41,202,43,196,44,167,46"/>
+<area shape="rect" id="Node000003" href="$namespacesdl.html#aa3e8187f011be2af6cdd67f41fca97d6" title=" " alt="" coords="456,5,561,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="405,29,437,27,442,27,406,34"/>
+<area shape="rect" id="Node000004" href="$namespacesdl.html#af1063550d176be4c42d353aaad43c27a" title=" " alt="" coords="453,55,563,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="406,52,441,59,435,59,405,58"/>
+</map>

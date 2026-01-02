@@ -1,0 +1,41 @@
+<map id="main.cpp" name="main.cpp">
+<area shape="rect" id="Node000001" title="Console menu and SDL2 visualization launcher." alt="" coords="733,5,808,31"/>
+<area shape="rect" id="Node000002" href="$sdl__core_8hpp.html" title="SDL2 initialization wrapper." alt="" coords="5,226,101,252"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="730,22,565,40,456,57,348,82,260,112,177,155,126,187,82,218,79,214,123,183,174,150,258,107,347,76,455,52,564,35,735,21"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="298,300,352,326"/>
+<area shape="poly" id="edge22_Node000001_Node000004" title=" " alt="" coords="771,29,764,75,747,136,734,169,716,201,695,230,668,254,644,266,612,277,530,294,442,305,368,311,367,306,441,299,529,288,610,272,642,262,665,250,691,226,712,198,729,167,742,134,759,74,767,33"/>
+<area shape="rect" id="Node000006" href="$sdl__app_8hpp.html" title="SDL2 application for heat equation visualization." alt="" coords="359,79,451,105"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="730,28,467,81,465,76,735,26"/>
+<area shape="rect" id="Node000010" href="$material_8hpp.html" title=" " alt="" coords="562,226,654,252"/>
+<area shape="poly" id="edge20_Node000001_Node000010" title=" " alt="" coords="766,30,726,97,667,180,633,217,630,213,663,177,722,94,761,33"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="808,79,879,105"/>
+<area shape="poly" id="edge21_Node000001_Node000013" title=" " alt="" coords="783,29,823,69,818,68,782,34"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="903,79,955,105"/>
+<area shape="poly" id="edge23_Node000001_Node000014" title=" " alt="" coords="798,29,891,72,886,73,797,34"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="980,79,1046,105"/>
+<area shape="poly" id="edge24_Node000001_Node000015" title=" " alt="" coords="808,28,967,76,962,77,808,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="113,300,172,326"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="69,250,118,289,113,291,67,255"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="100,250,285,298,282,303,99,255"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="11,300,90,326"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="54,250,54,285,49,284,51,254"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="356,98,322,105,282,115,241,131,204,155,179,184,162,218,152,254,147,286,142,283,147,253,157,216,175,181,201,151,238,127,280,110,321,100,361,95"/>
+<area shape="rect" id="Node000007" href="$sdl__window_8hpp.html" title="SDL2 window and renderer wrapper." alt="" coords="176,226,288,252"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="356,94,322,100,283,110,246,127,217,154,211,167,210,182,220,214,215,212,205,183,206,166,212,151,243,123,281,105,322,95,361,92"/>
+<area shape="rect" id="Node000008" href="$sdl__heatmap_8hpp.html" title="Temperature visualization using Inferno colormap." alt="" coords="226,153,346,178"/>
+<area shape="poly" id="edge10_Node000006_Node000008" title=" " alt="" coords="387,104,321,147,318,142,383,107"/>
+<area shape="poly" id="edge14_Node000006_Node000010" title=" " alt="" coords="451,95,563,114,613,130,633,140,646,151,652,167,650,185,631,217,628,212,645,183,647,168,641,154,630,144,611,135,561,119,451,101"/>
+<area shape="rect" id="Node000011" href="$heat__equation__solver_8hpp.html" title="1D and 2D Heat Equation Solvers &#45; Implicit Finite Differences" alt="" coords="464,153,632,178"/>
+<area shape="poly" id="edge16_Node000006_Node000011" title=" " alt="" coords="430,103,512,145,507,146,429,108"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="371,153,439,178"/>
+<area shape="poly" id="edge19_Node000006_Node000012" title=" " alt="" coords="407,103,407,138,403,136,403,107"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="219,252,171,292,168,288,214,253"/>
+<area shape="poly" id="edge9_Node000007_Node000004" title=" " alt="" coords="248,250,300,291,295,290,247,255"/>
+<area shape="poly" id="edge13_Node000008_Node000004" title=" " alt="" coords="291,177,320,286,315,284,288,181"/>
+<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="279,177,252,216,248,212,275,180"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="452,226,510,252"/>
+<area shape="poly" id="edge12_Node000008_Node000009" title=" " alt="" coords="320,176,441,222,435,223,319,182"/>
+<area shape="poly" id="edge15_Node000010_Node000004" title=" " alt="" coords="564,252,367,304,366,298,558,252"/>
+<area shape="poly" id="edge18_Node000011_Node000009" title=" " alt="" coords="539,177,504,217,501,212,534,180"/>
+<area shape="poly" id="edge17_Node000011_Node000010" title=" " alt="" coords="559,176,590,215,585,214,557,181"/>
+</map>
