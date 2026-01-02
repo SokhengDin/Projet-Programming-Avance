@@ -40,7 +40,7 @@ void SDLApp::start_simulation() {
 
     if (sim_type_ == SimType::BAR_1D) {
         n_ = 1001;
-        speed_ = 10;
+        speed_ = 5;  // Same speed as 2D
         solver_1d_ = std::make_unique<ensiie::HeatEquationSolver1D>(
             material_, L_, tmax_, u0_, f_, n_
         );
@@ -58,17 +58,29 @@ void SDLApp::start_simulation() {
 void SDLApp::render() {
     window_->clear(0, 0, 0);
 
+    // Build simulation info for display
+    SimInfo info;
+    info.material_name = material_.name;
+    info.alpha = material_.alpha();
+    info.L = L_;
+    info.tmax = tmax_;
+    info.u0 = u0_ + 273.15;  // Convert to Kelvin for display
+    info.speed = speed_;
+    info.paused = paused_;
+
     if (sim_type_ == SimType::BAR_1D && solver_1d_) {
+        info.time = solver_1d_->get_time();
         auto temps = solver_1d_->get_temperature();
         if (!temps.empty()) {
             heatmap_->auto_range(temps);
-            heatmap_->draw_1d_fullscreen(temps);
+            heatmap_->draw_1d_fullscreen(temps, info);
         }
     } else if (sim_type_ == SimType::PLATE_2D && solver_2d_) {
+        info.time = solver_2d_->get_time();
         auto temps = solver_2d_->get_temperature_2d();
         if (!temps.empty() && !temps[0].empty()) {
             heatmap_->auto_range_2d(temps);
-            heatmap_->draw_2d_fullscreen(temps);
+            heatmap_->draw_2d_fullscreen(temps, info);
         }
     }
 
