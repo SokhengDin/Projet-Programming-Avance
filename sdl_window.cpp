@@ -15,13 +15,25 @@ SDLWindow::SDLWindow(const std::string& title, int width, int height, bool fulls
     , height_(height)
     , fullscreen_(fullscreen)
 {
+    Uint32 flags = SDL_WINDOW_SHOWN;
+
+    // If width/height are 0, use maximized window
+    if (width == 0 || height == 0) {
+        flags |= SDL_WINDOW_MAXIMIZED | SDL_WINDOW_RESIZABLE;
+        // Get display bounds for initial size
+        SDL_DisplayMode dm;
+        SDL_GetCurrentDisplayMode(0, &dm);
+        width  = dm.w;
+        height = dm.h;
+    }
+
     window_ = SDL_CreateWindow(
         title.c_str(),
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
         width,
         height,
-        SDL_WINDOW_SHOWN
+        flags
     );
 
     if (!window_) {
@@ -29,9 +41,11 @@ SDLWindow::SDLWindow(const std::string& title, int width, int height, bool fulls
     }
 
     if (fullscreen_) {
-        SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN);
-        SDL_GetWindowSize(window_, &width_, &height_);
+        SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN_DESKTOP);
     }
+
+    // Get actual window size
+    SDL_GetWindowSize(window_, &width_, &height_);
 
     renderer_ = SDL_CreateRenderer(
         window_, -1,

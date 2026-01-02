@@ -36,7 +36,7 @@ static void draw_digit(SDL_Renderer* rend, int x, int y, int digit) {
     if (segments[digit][6]) SDL_RenderDrawLine(rend, x, y+h, x+w, y+h);
 }
 
-// Helper: Simple letter rendering (uppercase only)
+// Helper: Letter rendering upper case
 static void draw_letter(SDL_Renderer* rend, int x, int y, char c) {
     const int w = 4;
     const int h = 10;
@@ -166,8 +166,8 @@ void SDLHeatmap::set_range(double t_min, double t_max) {
 
 void SDLHeatmap::auto_range(const std::vector<double>& temps) {
     if (temps.empty()) return;
-    auto minmax = std::minmax_element(temps.begin(), temps.end());
-    double margin = (*minmax.second - *minmax.first) * 0.05;
+    auto minmax     = std::minmax_element(temps.begin(), temps.end());
+    double margin   = (*minmax.second - *minmax.first) * 0.05;
     t_min_ = *minmax.first - margin;
     t_max_ = *minmax.second + margin;
     if (t_max_ - t_min_ < 1.0) {
@@ -246,7 +246,7 @@ void SDLHeatmap::temp_to_rgb(double t, Uint8& r, Uint8& g, Uint8& b) const {
     b = static_cast<Uint8>(INFERNO_MAP[i0][2] * (1 - frac) + INFERNO_MAP[i1][2] * frac);
 }
 
-// Simple number rendering using 7-segment style display
+// Number rendering display
 void SDLHeatmap::draw_number(SDL_Renderer* rend, int x, int y, double value) const {
     char buffer[32];
     snprintf(buffer, sizeof(buffer), "%.1f", value);
@@ -269,7 +269,7 @@ void SDLHeatmap::draw_number(SDL_Renderer* rend, int x, int y, double value) con
     }
 }
 
-// Text rendering using 7-segment digits and simple letter shapes
+// Text rendering using 7-segment digits
 void SDLHeatmap::draw_text(SDL_Renderer* rend, int x, int y, const char* text) const {
     int offset = 0;
     for (int i = 0; text[i] != '\0'; ++i) {
@@ -367,6 +367,7 @@ void SDLHeatmap::draw_info_panel(SDL_Renderer* rend, const SimInfo& info) const 
     int bar_w = 80;
     int bar_h = 10;
     double progress = info.time / info.tmax;
+
     SDL_SetRenderDrawColor(rend, 80, 80, 80, 255);
     SDL_Rect bar_bg = {bar_x, y + 2, bar_w, bar_h};
     SDL_RenderFillRect(rend, &bar_bg);
@@ -389,7 +390,7 @@ void SDLHeatmap::draw_info_panel(SDL_Renderer* rend, const SimInfo& info) const 
     }
 }
 
-// Grid lines for better readability
+// Grid lines
 void SDLHeatmap::draw_grid(SDL_Renderer* rend, int x0, int y0, int w, int h, int nx, int ny) const {
     SDL_SetRenderDrawColor(rend, 100, 100, 100, 128);
 
@@ -419,10 +420,10 @@ void SDLHeatmap::draw_1d_fullscreen(const std::vector<double>& temps, const SimI
     int n = static_cast<int>(temps.size());
 
     // Margins for axes and info panel
-    int margin_left = 60;
-    int margin_right = 80;  // Space for colorbar
-    int margin_top = 25;    // Space for info panel
-    int margin_bottom = 50;
+    int margin_left     = 60;
+    int margin_right    = 80;   
+    int margin_top      = 25;    
+    int margin_bottom   = 50;
 
     int plot_w = win_w - margin_left - margin_right;
     int plot_h = win_h - margin_top - margin_bottom;
@@ -471,9 +472,9 @@ void SDLHeatmap::draw_1d_fullscreen(const std::vector<double>& temps, const SimI
     }
 
     // Draw min marker (blue circle)
-    int min_x = margin_left + (min_idx * plot_w) / n;
+    int min_x       = margin_left + (min_idx * plot_w) / n;
     double min_norm = (min_temp - t_min_) / (t_max_ - t_min_);
-    int min_y = margin_top + plot_h - static_cast<int>(min_norm * plot_h);
+    int min_y       = margin_top + plot_h - static_cast<int>(min_norm * plot_h);
     SDL_SetRenderDrawColor(rend, 100, 150, 255, 255);
     for (int dx = -4; dx <= 4; dx++) {
         for (int dy = -4; dy <= 4; dy++) {
@@ -506,7 +507,7 @@ void SDLHeatmap::draw_1d_fullscreen(const std::vector<double>& temps, const SimI
     SDL_RenderDrawLine(rend, margin_left, margin_top,
                        margin_left, win_h - margin_bottom);
 
-    // X-axis ticks and labels (position in meters)
+    // X-axis ticks and labels unit meters
     int num_x_ticks = 5;
     for (int i = 0; i <= num_x_ticks; i++) {
         int x = margin_left + (i * plot_w) / num_x_ticks;
@@ -542,23 +543,23 @@ void SDLHeatmap::draw_1d_fullscreen(const std::vector<double>& temps, const SimI
     draw_text(rend, margin_left + plot_w - 40, margin_top + plot_h + 25, dirichlet_buf);
 
     // Heat source labels
-    // Source 1: [L/10, 2L/10] - 100% power
+    // Source 1: [L/10, 2L/10]
     int src1_x1 = margin_left + static_cast<int>((1.0/10.0) * plot_w);
     int src1_x2 = margin_left + static_cast<int>((2.0/10.0) * plot_w);
     int src1_center = (src1_x1 + src1_x2) / 2;
 
-    // Source 2: [5L/10, 6L/10] - 75% power
+    // Source 2: [5L/10, 6L/10]
     int src2_x1 = margin_left + static_cast<int>((5.0/10.0) * plot_w);
     int src2_x2 = margin_left + static_cast<int>((6.0/10.0) * plot_w);
     int src2_center = (src2_x1 + src2_x2) / 2;
 
-    // Draw source region highlighting (semi-transparent overlay on heatmap)
-    // Source 1 - stronger source (100%)
+    // Draw source region
+    // Source 1 
     SDL_SetRenderDrawColor(rend, 0, 255, 255, 255);
     SDL_Rect src1_rect = {src1_x1, margin_top, src1_x2 - src1_x1, plot_h};
     SDL_RenderDrawRect(rend, &src1_rect);
 
-    // Source 2 - weaker source (75%)
+    // Source 2 
     SDL_Rect src2_rect = {src2_x1, margin_top, src2_x2 - src2_x1, plot_h};
     SDL_RenderDrawRect(rend, &src2_rect);
 
@@ -569,6 +570,7 @@ void SDLHeatmap::draw_1d_fullscreen(const std::vector<double>& temps, const SimI
     SDL_RenderDrawLine(rend, src1_x1, bracket_y, src1_x1, bracket_y - 5);
     SDL_RenderDrawLine(rend, src1_x1, bracket_y - 5, src1_x2, bracket_y - 5);
     SDL_RenderDrawLine(rend, src1_x2, bracket_y, src1_x2, bracket_y - 5);
+
     // Arrow pointing to source region
     int arrow_x1 = src1_center;
     SDL_RenderDrawLine(rend, arrow_x1, bracket_y - 5, arrow_x1, bracket_y - 12);
@@ -603,15 +605,15 @@ void SDLHeatmap::draw_2d_fullscreen(const std::vector<std::vector<double>>& temp
     int nx = static_cast<int>(temps[0].size());
 
     // Margins for axes and info panel
-    int margin_left = 60;
-    int margin_right = 80;  // Space for colorbar
-    int margin_top = 25;    // Space for info panel
-    int margin_bottom = 50;
+    int margin_left     = 60;
+    int margin_right    = 80;  // Space for colorbar
+    int margin_top      = 25;    // Space for info panel
+    int margin_bottom   = 50;
 
     int plot_w = win_w - margin_left - margin_right;
     int plot_h = win_h - margin_top - margin_bottom;
 
-    // Draw info panel at top
+    // Draw panel at top
     draw_info_panel(rend, info);
 
     // Bilinear interpolation with subsampling
@@ -642,6 +644,7 @@ void SDLHeatmap::draw_2d_fullscreen(const std::vector<std::vector<double>>& temp
 
             int x1 = margin_left + (si * plot_w) / render_nx;
             int x2 = margin_left + ((si + 1) * plot_w) / render_nx;
+
             // Flip Y-axis: y=0 (Neumann) at bottom, y=L (Dirichlet) at top
             int y1 = margin_top + plot_h - ((sj + 1) * plot_h) / render_ny;
             int y2 = margin_top + plot_h - (sj * plot_h) / render_ny;
@@ -741,12 +744,6 @@ void SDLHeatmap::draw_2d_fullscreen(const std::vector<std::vector<double>>& temp
     snprintf(dirichlet_buf, sizeof(dirichlet_buf), "U=%.0fK", info.u0);
     draw_text(rend, margin_left + plot_w - 40, margin_top - 12, dirichlet_buf);
 
-    // Heat source labels for 2D (4 symmetric sources, all same power)
-    // Sources are at: [L/6, 2L/6] x [L/6, 2L/6] (bottom-left)
-    //                 [4L/6, 5L/6] x [L/6, 2L/6] (bottom-right)
-    //                 [L/6, 2L/6] x [4L/6, 5L/6] (top-left)
-    //                 [4L/6, 5L/6] x [4L/6, 5L/6] (top-right)
-
     // Calculate source positions in screen coordinates
     double src_x1_norm = 1.0/6.0, src_x2_norm = 2.0/6.0;
     double src_x3_norm = 4.0/6.0, src_x4_norm = 5.0/6.0;
@@ -759,12 +756,12 @@ void SDLHeatmap::draw_2d_fullscreen(const std::vector<std::vector<double>>& temp
     int sx3 = margin_left + static_cast<int>(src_x3_norm * plot_w);
     int sx4 = margin_left + static_cast<int>(src_x4_norm * plot_w);
 
-    int sy1 = margin_top + plot_h - static_cast<int>(src_y2_norm * plot_h);  // Y is inverted
+    int sy1 = margin_top + plot_h - static_cast<int>(src_y2_norm * plot_h);
     int sy2 = margin_top + plot_h - static_cast<int>(src_y1_norm * plot_h);
     int sy3 = margin_top + plot_h - static_cast<int>(src_y4_norm * plot_h);
     int sy4 = margin_top + plot_h - static_cast<int>(src_y3_norm * plot_h);
 
-    // Draw source region rectangles (cyan outline with double border for visibility)
+    // Draw source region rectangles
     SDL_SetRenderDrawColor(rend, 0, 255, 255, 255);
     SDL_Rect src_bl = {sx1, sy1, sx2 - sx1, sy2 - sy1};  // Bottom-left
     SDL_Rect src_br = {sx3, sy1, sx4 - sx3, sy2 - sy1};  // Bottom-right
@@ -777,7 +774,7 @@ void SDLHeatmap::draw_2d_fullscreen(const std::vector<std::vector<double>>& temp
     SDL_RenderDrawRect(rend, &src_tl);
     SDL_RenderDrawRect(rend, &src_tr);
 
-    // Inner border for better visibility
+    // Inner border
     SDL_Rect src_bl_inner = {sx1 + 1, sy1 + 1, sx2 - sx1 - 2, sy2 - sy1 - 2};
     SDL_Rect src_br_inner = {sx3 + 1, sy1 + 1, sx4 - sx3 - 2, sy2 - sy1 - 2};
     SDL_Rect src_tl_inner = {sx1 + 1, sy3 + 1, sx2 - sx1 - 2, sy4 - sy3 - 2};
@@ -789,6 +786,7 @@ void SDLHeatmap::draw_2d_fullscreen(const std::vector<std::vector<double>>& temp
 
     // Draw corner marks for each source
     int mark_len = 5;
+
     // Bottom-left source corners
     SDL_RenderDrawLine(rend, sx1 - mark_len, sy1, sx1, sy1);
     SDL_RenderDrawLine(rend, sx1, sy1 - mark_len, sx1, sy1);
@@ -801,6 +799,695 @@ void SDLHeatmap::draw_2d_fullscreen(const std::vector<std::vector<double>>& temp
     draw_text(rend, (sx3 + sx4) / 2 - 5, (sy1 + sy2) / 2 - 5, "F2");
     draw_text(rend, (sx1 + sx2) / 2 - 5, (sy3 + sy4) / 2 - 5, "F3");
     draw_text(rend, (sx3 + sx4) / 2 - 5, (sy3 + sy4) / 2 - 5, "F4");
+}
+
+void SDLHeatmap::draw_1d_cell(const std::vector<double>& temps, const SimInfo& info,
+                               int cell_x, int cell_y, int cell_w, int cell_h) {
+    if (temps.empty()) return;
+
+    SDL_Renderer* rend = win_.get_renderer();
+    int n = static_cast<int>(temps.size());
+
+    // Margins for cell mode
+    int margin_left     = 50;
+    int margin_right    = 60;
+    int margin_top      = 20;
+    int margin_bottom   = 40;
+
+    int plot_x = cell_x + margin_left;
+    int plot_y = cell_y + margin_top;
+    int plot_w = cell_w - margin_left - margin_right;
+    int plot_h = cell_h - margin_top - margin_bottom;
+
+    // Draw material name and alpha at top
+    SDL_SetRenderDrawColor(rend, 200, 200, 200, 255);
+    draw_text(rend, cell_x + 5, cell_y + 5, info.material_name.c_str());
+
+    char alpha_buf[32];
+    snprintf(alpha_buf, sizeof(alpha_buf), "A=%.1E", info.alpha);
+    draw_text(rend, cell_x + 80, cell_y + 5, alpha_buf);
+
+    // Draw time
+    char time_buf[32];
+    snprintf(time_buf, sizeof(time_buf), "T=%.1FS", info.time);
+    draw_text(rend, cell_x + cell_w - 70, cell_y + 5, time_buf);
+
+    // Draw heatmap
+    for (int i = 0; i < n; i++) {
+        Uint8 r, g, b;
+        temp_to_rgb(temps[i], r, g, b);
+
+        int x1 = plot_x + (i * plot_w) / n;
+        int x2 = plot_x + ((i + 1) * plot_w) / n;
+
+        SDL_SetRenderDrawColor(rend, r, g, b, 255);
+        SDL_Rect rect = {x1, plot_y, x2 - x1 + 1, plot_h};
+        SDL_RenderFillRect(rend, &rect);
+    }
+
+    // Draw temperature profile line (white curve)
+    SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
+    for (int i = 0; i < n - 1; i++) {
+        double norm1 = (temps[i] - t_min_) / (t_max_ - t_min_);
+        double norm2 = (temps[i+1] - t_min_) / (t_max_ - t_min_);
+        norm1 = std::max(0.0, std::min(1.0, norm1));
+        norm2 = std::max(0.0, std::min(1.0, norm2));
+
+        int x1 = plot_x + (i * plot_w) / n;
+        int x2 = plot_x + ((i + 1) * plot_w) / n;
+        int y1 = plot_y + plot_h - static_cast<int>(norm1 * plot_h);
+        int y2 = plot_y + plot_h - static_cast<int>(norm2 * plot_h);
+
+        SDL_RenderDrawLine(rend, x1, y1, x2, y2);
+    }
+
+    // Temperature value projections at key positions
+    // Temperature values at: x=0 (Neumann), center of sources, x=L (Dirichlet)
+    int key_indices[] = {0, n/10 + n/20, n/2 + n/20, n-1};  // x=0, src1 center, src2 center, x=L
+    const char* key_labels[] = {"", "S1", "S2", ""};
+
+    for (int k = 0; k < 4; k++) {
+        int idx = key_indices[k];
+        if (idx >= n) idx = n - 1;
+
+        double temp_val = temps[idx];
+        double norm     = (temp_val - t_min_) / (t_max_ - t_min_);
+        norm = std::max(0.0, std::min(1.0, norm));
+
+        int px = plot_x + (idx * plot_w) / n;
+        int py = plot_y + plot_h - static_cast<int>(norm * plot_h);
+
+        // Draw projection line to Y-axis (dashed)
+        SDL_SetRenderDrawColor(rend, 180, 180, 180, 255);
+        for (int x = plot_x; x < px; x += 4) {
+            SDL_RenderDrawPoint(rend, x, py);
+        }
+
+        // Draw small marker at the point
+        SDL_SetRenderDrawColor(rend, 255, 255, 0, 255);
+        SDL_Rect marker = {px - 2, py - 2, 5, 5};
+        SDL_RenderFillRect(rend, &marker);
+
+        // Draw temperature value near the projection on Y-axis
+        SDL_SetRenderDrawColor(rend, 255, 255, 150, 255);
+        char val_buf[16];
+        snprintf(val_buf, sizeof(val_buf), "%.0f", temp_val);
+
+        // Offset labels to avoid overlap
+        int label_y = py - 3 + (k % 2) * 12;
+        if (k == 0) {
+            draw_text(rend, plot_x - 25, label_y, val_buf);
+        } else if (k == 3) {
+            draw_text(rend, px + 3, label_y, val_buf);
+        }
+    }
+
+    // Draw colorbar on right side
+    int cb_x = cell_x + cell_w - margin_right + 5;
+    int cb_w = 12;
+    int cb_h = plot_h;
+
+    for (int i = 0; i < cb_h; ++i) {
+        double t = t_max_ - (i * (t_max_ - t_min_)) / cb_h;
+        Uint8 r, g, b;
+        temp_to_rgb(t, r, g, b);
+        SDL_SetRenderDrawColor(rend, r, g, b, 255);
+        SDL_RenderDrawLine(rend, cb_x, plot_y + i, cb_x + cb_w, plot_y + i);
+    }
+    SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
+    SDL_Rect cb_border = {cb_x - 1, plot_y - 1, cb_w + 2, cb_h + 2};
+    SDL_RenderDrawRect(rend, &cb_border);
+
+    // Colorbar labels (min/max)
+    draw_number(rend, cb_x + cb_w + 3, plot_y - 3, t_max_);
+    draw_number(rend, cb_x + cb_w + 3, plot_y + cb_h - 8, t_min_);
+
+    // Draw axes
+    SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
+    SDL_RenderDrawLine(rend, plot_x, plot_y + plot_h, plot_x + plot_w, plot_y + plot_h);  // X-axis
+    SDL_RenderDrawLine(rend, plot_x, plot_y, plot_x, plot_y + plot_h);  // Y-axis
+
+    // X-axis labels (0 and L)
+    draw_number(rend, plot_x - 5, plot_y + plot_h + 5, 0.0);
+    draw_number(rend, plot_x + plot_w - 15, plot_y + plot_h + 5, info.L);
+
+    // Y-axis label "U [K]" for temperature
+    SDL_SetRenderDrawColor(rend, 180, 180, 180, 255);
+    draw_text(rend, plot_x - 45, plot_y + plot_h / 2 - 5, "U[K]");
+
+    // Y-axis labels (temp range)
+    SDL_SetRenderDrawColor(rend, 200, 200, 200, 255);
+    draw_number(rend, plot_x - 45, plot_y - 3, t_max_);
+    draw_number(rend, plot_x - 45, plot_y + plot_h - 8, t_min_);
+
+    // X-axis label
+    SDL_SetRenderDrawColor(rend, 180, 180, 180, 255);
+    draw_text(rend, plot_x + plot_w / 2 - 10, plot_y + plot_h + 25, "X[M]");
+
+    // Boundary condition labels
+    SDL_SetRenderDrawColor(rend, 150, 255, 150, 255);
+    draw_text(rend, plot_x - 5, plot_y + plot_h + 15, "N");  // Neumann at x=0
+
+    SDL_SetRenderDrawColor(rend, 255, 180, 100, 255);
+    draw_text(rend, plot_x + plot_w - 10, plot_y + plot_h + 15, "D");  // Dirichlet at x=L
+
+    // Heat source regions - improved visualization
+    int src1_x1 = plot_x + static_cast<int>((1.0/10.0) * plot_w);
+    int src1_x2 = plot_x + static_cast<int>((2.0/10.0) * plot_w);
+    int src2_x1 = plot_x + static_cast<int>((5.0/10.0) * plot_w);
+    int src2_x2 = plot_x + static_cast<int>((6.0/10.0) * plot_w);
+
+    // Draw semi-transparent filled regions for heat sources
+    SDL_SetRenderDrawColor(rend, 255, 200, 0, 255);  // Yellow/orange for heat
+    // Source 1 
+    for (int y = plot_y; y < plot_y + plot_h; y += 3) {
+        for (int x = src1_x1; x < src1_x2; x += 3) {
+            SDL_RenderDrawPoint(rend, x, y);
+        }
+    }
+    // Source 2 
+    for (int y = plot_y; y < plot_y + plot_h; y += 3) {
+        for (int x = src2_x1; x < src2_x2; x += 3) {
+            SDL_RenderDrawPoint(rend, x, y);
+        }
+    }
+
+    // Draw thick borders around heat sources
+    SDL_SetRenderDrawColor(rend, 255, 150, 0, 255);  // Orange border
+
+    // Source 1
+    SDL_Rect src1 = {src1_x1, plot_y, src1_x2 - src1_x1, plot_h};
+    SDL_Rect src1_inner = {src1_x1 + 1, plot_y + 1, src1_x2 - src1_x1 - 2, plot_h - 2};
+    SDL_RenderDrawRect(rend, &src1);
+    SDL_RenderDrawRect(rend, &src1_inner);
+
+    // Source 2
+    SDL_Rect src2 = {src2_x1, plot_y, src2_x2 - src2_x1, plot_h};
+    SDL_Rect src2_inner = {src2_x1 + 1, plot_y + 1, src2_x2 - src2_x1 - 2, plot_h - 2};
+    SDL_RenderDrawRect(rend, &src2);
+    SDL_RenderDrawRect(rend, &src2_inner);
+
+    // Draw arrows pointing down into the sources (heat input indicator)
+    SDL_SetRenderDrawColor(rend, 255, 255, 0, 255);  // Bright yellow arrows
+    int arrow_y = plot_y - 8;
+    int src1_cx = (src1_x1 + src1_x2) / 2;
+    int src2_cx = (src2_x1 + src2_x2) / 2;
+
+    // Arrow 1 pointing down
+    SDL_RenderDrawLine(rend, src1_cx, arrow_y, src1_cx, plot_y - 2);
+    SDL_RenderDrawLine(rend, src1_cx - 3, plot_y - 5, src1_cx, plot_y - 2);
+    SDL_RenderDrawLine(rend, src1_cx + 3, plot_y - 5, src1_cx, plot_y - 2);
+
+    // Arrow 2 pointing down
+    SDL_RenderDrawLine(rend, src2_cx, arrow_y, src2_cx, plot_y - 2);
+    SDL_RenderDrawLine(rend, src2_cx - 3, plot_y - 5, src2_cx, plot_y - 2);
+    SDL_RenderDrawLine(rend, src2_cx + 3, plot_y - 5, src2_cx, plot_y - 2);
+
+    // Find and draw min/max temperature markers
+    int min_idx = 0, max_idx = 0;
+    double min_temp = temps[0], max_temp = temps[0];
+    for (int i = 1; i < n; i++) {
+        if (temps[i] < min_temp) { min_temp = temps[i]; min_idx = i; }
+        if (temps[i] > max_temp) { max_temp = temps[i]; max_idx = i; }
+    }
+
+    // Min marker (blue circle)
+    int min_x = plot_x + (min_idx * plot_w) / n;
+    double min_norm = (min_temp - t_min_) / (t_max_ - t_min_);
+    min_norm        = std::max(0.0, std::min(1.0, min_norm));
+    int min_y       = plot_y + plot_h - static_cast<int>(min_norm * plot_h);
+    SDL_SetRenderDrawColor(rend, 100, 150, 255, 255);
+    for (int dx = -3; dx <= 3; dx++) {
+        for (int dy = -3; dy <= 3; dy++) {
+            if (dx*dx + dy*dy <= 9) SDL_RenderDrawPoint(rend, min_x + dx, min_y + dy);
+        }
+    }
+
+    // Max marker (red circle)
+    int max_x = plot_x + (max_idx * plot_w) / n;
+    double max_norm = (max_temp - t_min_) / (t_max_ - t_min_);
+    max_norm = std::max(0.0, std::min(1.0, max_norm));
+    int max_y = plot_y + plot_h - static_cast<int>(max_norm * plot_h);
+    SDL_SetRenderDrawColor(rend, 255, 100, 100, 255);
+    for (int dx = -3; dx <= 3; dx++) {
+        for (int dy = -3; dy <= 3; dy++) {
+            if (dx*dx + dy*dy <= 9) SDL_RenderDrawPoint(rend, max_x + dx, max_y + dy);
+        }
+    }
+
+    // Progress bar
+    int bar_x = cell_x + cell_w - 65;
+    int bar_y = cell_y + cell_h - 18;
+    int bar_w = 55;
+    int bar_h = 8;
+    double progress = info.time / info.tmax;
+
+    SDL_SetRenderDrawColor(rend, 60, 60, 60, 255);
+    SDL_Rect bar_bg = {bar_x, bar_y, bar_w, bar_h};
+    SDL_RenderFillRect(rend, &bar_bg);
+    SDL_SetRenderDrawColor(rend, 80, 180, 80, 255);
+    SDL_Rect bar_fg = {bar_x, bar_y, static_cast<int>(bar_w * progress), bar_h};
+    SDL_RenderFillRect(rend, &bar_fg);
+    SDL_SetRenderDrawColor(rend, 200, 200, 200, 255);
+    SDL_RenderDrawRect(rend, &bar_bg);
+
+    // Speed indicator
+    char speed_buf[16];
+    snprintf(speed_buf, sizeof(speed_buf), "X%d", info.speed);
+    SDL_SetRenderDrawColor(rend, 150, 200, 255, 255);
+    draw_text(rend, cell_x + cell_w - 130, cell_y + cell_h - 18, speed_buf);
+
+    // Paused indicator
+    if (info.paused) {
+        SDL_SetRenderDrawColor(rend, 255, 200, 50, 255);
+        draw_text(rend, cell_x + 5, cell_y + cell_h - 18, "PAUSED");
+    }
+
+    // Draw border
+    SDL_SetRenderDrawColor(rend, 100, 100, 100, 255);
+    SDL_Rect border = {plot_x, plot_y, plot_w, plot_h};
+    SDL_RenderDrawRect(rend, &border);
+}
+
+void SDLHeatmap::draw_2d_cell(const std::vector<std::vector<double>>& temps, const SimInfo& info,
+                               int cell_x, int cell_y, int cell_w, int cell_h) {
+    if (temps.empty()) return;
+
+    SDL_Renderer* rend = win_.get_renderer();
+
+    int ny = static_cast<int>(temps.size());
+    int nx = static_cast<int>(temps[0].size());
+
+    // Margins for cell mode
+    int margin_left     = 50;
+    int margin_right    = 60;
+    int margin_top      = 20;
+    int margin_bottom   = 40;
+
+    int plot_x = cell_x + margin_left;
+    int plot_y = cell_y + margin_top;
+    int plot_w = cell_w - margin_left - margin_right;
+    int plot_h = cell_h - margin_top - margin_bottom;
+
+    // Draw material name and alpha at top
+    SDL_SetRenderDrawColor(rend, 200, 200, 200, 255);
+    draw_text(rend, cell_x + 5, cell_y + 5, info.material_name.c_str());
+
+    char alpha_buf[32];
+    snprintf(alpha_buf, sizeof(alpha_buf), "A=%.1E", info.alpha);
+    draw_text(rend, cell_x + 80, cell_y + 5, alpha_buf);
+
+    // Draw time
+    char time_buf[32];
+    snprintf(time_buf, sizeof(time_buf), "T=%.1FS", info.time);
+    draw_text(rend, cell_x + cell_w - 70, cell_y + 5, time_buf);
+
+    // Draw heatmap with bilinear interpolation
+    int sub       = 2;
+    int render_nx = (nx - 1) * sub;
+    int render_ny = (ny - 1) * sub;
+
+    for (int sj = 0; sj < render_ny; ++sj) {
+        for (int si = 0; si < render_nx; ++si) {
+            double fi = static_cast<double>(si) / sub;
+            double fj = static_cast<double>(sj) / sub;
+
+            int i0 = static_cast<int>(fi);
+            int j0 = static_cast<int>(fj);
+            int i1 = std::min(i0 + 1, nx - 1);
+            int j1 = std::min(j0 + 1, ny - 1);
+
+            double fx = fi - i0;
+            double fy = fj - j0;
+
+            double t = temps[j0][i0] * (1-fx) * (1-fy)
+                     + temps[j0][i1] * fx * (1-fy)
+                     + temps[j1][i0] * (1-fx) * fy
+                     + temps[j1][i1] * fx * fy;
+
+            Uint8 r, g, b;
+            temp_to_rgb(t, r, g, b);
+
+            int x1 = plot_x + (si * plot_w) / render_nx;
+            int x2 = plot_x + ((si + 1) * plot_w) / render_nx;
+            // Flip Y-axis
+            int y1 = plot_y + plot_h - ((sj + 1) * plot_h) / render_ny;
+            int y2 = plot_y + plot_h - (sj * plot_h) / render_ny;
+
+            SDL_SetRenderDrawColor(rend, r, g, b, 255);
+            SDL_Rect rect = {x1, y1, x2 - x1 + 1, y2 - y1 + 1};
+            SDL_RenderFillRect(rend, &rect);
+        }
+    }
+
+    // Draw heat flow arrows (negative gradient shows direction of heat flow)
+    // Heat flows from hot to cold regions
+    int arrow_grid  = 8; // 8x8 grids
+    int arrow_len   = std::min(plot_w, plot_h) / (arrow_grid * 2);
+
+    for (int aj = 0; aj < arrow_grid; aj++) {
+        for (int ai = 0; ai < arrow_grid; ai++) {
+            // Sample point in the grid
+            int i = (ai * (nx - 1)) / arrow_grid;
+            int j = (aj * (ny - 1)) / arrow_grid;
+
+            if (i <= 0 || i >= nx - 1 || j <= 0 || j >= ny - 1) continue;
+
+            // Calculate gradient
+            double dTdx = (temps[j][i+1] - temps[j][i-1]) / (2.0 * (info.L / nx));
+            double dTdy = (temps[j+1][i] - temps[j-1][i]) / (2.0 * (info.L / ny));
+
+            // Heat flow is 
+            double flow_x = -dTdx;
+            double flow_y = -dTdy;
+
+            // Normalize and scale arrow
+            double mag = std::sqrt(flow_x * flow_x + flow_y * flow_y);
+            if (mag < 0.1) continue; 
+
+            double scale = arrow_len / mag;
+            if (scale > arrow_len) scale = arrow_len;  // Limit max length
+
+            int ax = static_cast<int>(flow_x * scale);
+            int ay = static_cast<int>(flow_y * scale);
+
+            // Arrow base position
+            int bx = plot_x + (i * plot_w) / nx;
+            int by = plot_y + plot_h - (j * plot_h) / ny;  // Y flipped
+
+            // Arrow tip
+            int tx = bx + ax;
+            int ty = by - ay;  // Y flipped
+
+            // Draw arrow line 
+            SDL_SetRenderDrawColor(rend, 0, 255, 200, 255);
+            SDL_RenderDrawLine(rend, bx, by, tx, ty);
+
+            // Draw arrowhead
+            double angle = std::atan2(-ay, ax);
+            int head_len = 4;
+            int hx1 = tx - static_cast<int>(head_len * std::cos(angle - 0.5));
+            int hy1 = ty - static_cast<int>(head_len * std::sin(angle - 0.5));
+            int hx2 = tx - static_cast<int>(head_len * std::cos(angle + 0.5));
+            int hy2 = ty - static_cast<int>(head_len * std::sin(angle + 0.5));
+            SDL_RenderDrawLine(rend, tx, ty, hx1, hy1);
+            SDL_RenderDrawLine(rend, tx, ty, hx2, hy2);
+        }
+    }
+
+    // Draw contour lines (isotherms) 
+    int num_contours = 5;
+    for (int c = 1; c < num_contours; c++) {
+        double contour_temp = t_min_ + c * (t_max_ - t_min_) / num_contours;
+
+        // Color based on temperature level
+        Uint8 cr, cg, cb;
+        temp_to_rgb(contour_temp, cr, cg, cb);
+        SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
+
+        for (int j = 0; j < ny - 1; j++) {
+            for (int i = 0; i < nx - 1; i++) {
+                double t00 = temps[j][i];
+                double t10 = temps[j][i+1];
+                double t01 = temps[j+1][i];
+                double t11 = temps[j+1][i+1];
+
+                double cell_min = std::min({t00, t10, t01, t11});
+                double cell_max = std::max({t00, t10, t01, t11});
+
+                if (contour_temp >= cell_min && contour_temp <= cell_max) {
+                    int cx = plot_x + ((i * 2 + 1) * plot_w) / (2 * nx);
+                    int cy = plot_y + plot_h - ((j * 2 + 1) * plot_h) / (2 * ny);
+                    // Draw small cross for contour point
+                    SDL_RenderDrawPoint(rend, cx, cy);
+                    SDL_RenderDrawPoint(rend, cx+1, cy);
+                    SDL_RenderDrawPoint(rend, cx-1, cy);
+                    SDL_RenderDrawPoint(rend, cx, cy+1);
+                    SDL_RenderDrawPoint(rend, cx, cy-1);
+                }
+            }
+        }
+    }
+
+    // Draw temperature profile along bottom edge (Y=0, varying X)
+    int profile_h = 25;  // Height of profile graph
+    int profile_y = plot_y + plot_h + 5;  // Below the main plot
+
+    SDL_SetRenderDrawColor(rend, 100, 200, 255, 255);  // Light blue for X profile
+    for (int i = 0; i < nx - 1; i++) {
+        double t1 = temps[0][i];
+        double t2 = temps[0][i+1];
+        double norm1 = (t1 - t_min_) / (t_max_ - t_min_);
+        double norm2 = (t2 - t_min_) / (t_max_ - t_min_);
+
+        norm1 = std::max(0.0, std::min(1.0, norm1));
+        norm2 = std::max(0.0, std::min(1.0, norm2));
+
+        int x1 = plot_x + (i * plot_w) / nx;
+        int x2 = plot_x + ((i + 1) * plot_w) / nx;
+        int y1 = profile_y + profile_h - static_cast<int>(norm1 * profile_h);
+        int y2 = profile_y + profile_h - static_cast<int>(norm2 * profile_h);
+
+        SDL_RenderDrawLine(rend, x1, y1, x2, y2);
+    }
+
+    // Draw temperature profile along left edge (X=0, varying Y)
+    int profile_w = 20;  // Width of profile graph
+    int profile_x = plot_x - profile_w - 5;  // Left of the main plot
+
+    SDL_SetRenderDrawColor(rend, 255, 200, 100, 255);  // Orange for Y profile
+    for (int j = 0; j < ny - 1; j++) {
+        double t1 = temps[j][0];
+        double t2 = temps[j+1][0];
+        double norm1 = (t1 - t_min_) / (t_max_ - t_min_);
+        double norm2 = (t2 - t_min_) / (t_max_ - t_min_);
+        norm1 = std::max(0.0, std::min(1.0, norm1));
+        norm2 = std::max(0.0, std::min(1.0, norm2));
+
+        int y1 = plot_y + plot_h - (j * plot_h) / ny;
+        int y2 = plot_y + plot_h - ((j + 1) * plot_h) / ny;
+        int x1 = profile_x + static_cast<int>(norm1 * profile_w);
+        int x2 = profile_x + static_cast<int>(norm2 * profile_w);
+
+        SDL_RenderDrawLine(rend, x1, y1, x2, y2);
+    }
+
+    // Temperature values at key positions
+    struct ProjPt2D { int i; int j; };
+    ProjPt2D proj_pts_2d[] = {
+        {0, 0},           // Bottom-left (Neumann corner)
+        {nx-1, ny-1},     // Top-right (Dirichlet corner)
+        {nx/2, ny/2}      // Center
+    };
+
+    for (int k = 0; k < 3; k++) {
+        int pi = proj_pts_2d[k].i;
+        int pj = proj_pts_2d[k].j;
+        double temp_val = temps[pj][pi];
+
+        int px = plot_x + (pi * plot_w) / nx;
+        int py = plot_y + plot_h - (pj * plot_h) / ny;  // Y flipped
+
+        // Draw marker
+        SDL_SetRenderDrawColor(rend, 255, 255, 0, 255);
+        for (int dx = -2; dx <= 2; dx++) {
+            for (int dy = -2; dy <= 2; dy++) {
+                if (dx*dx + dy*dy <= 4) SDL_RenderDrawPoint(rend, px + dx, py + dy);
+            }
+        }
+
+        // Draw temperature value
+        SDL_SetRenderDrawColor(rend, 255, 255, 150, 255);
+        char val_buf[16];
+        snprintf(val_buf, sizeof(val_buf), "%.0f", temp_val);
+
+        // Position label
+        int lx = px + 4, ly = py - 5;
+        if (pi == 0) lx = px - 22;
+        if (pj == ny-1) ly = py + 2;
+
+        draw_text(rend, lx, ly, val_buf);
+    }
+
+    // Draw colorbar on right side
+    int cb_x = cell_x + cell_w - margin_right + 5;
+    int cb_w = 12;
+    int cb_h = plot_h;
+    for (int i = 0; i < cb_h; ++i) {
+        double t = t_max_ - (i * (t_max_ - t_min_)) / cb_h;
+        Uint8 r, g, b;
+        temp_to_rgb(t, r, g, b);
+        SDL_SetRenderDrawColor(rend, r, g, b, 255);
+        SDL_RenderDrawLine(rend, cb_x, plot_y + i, cb_x + cb_w, plot_y + i);
+    }
+
+    SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
+
+    SDL_Rect cb_border = {cb_x - 1, plot_y - 1, cb_w + 2, cb_h + 2};
+    SDL_RenderDrawRect(rend, &cb_border);
+
+    // Colorbar labels (min/max)
+    draw_number(rend, cb_x + cb_w + 3, plot_y - 3, t_max_);
+    draw_number(rend, cb_x + cb_w + 3, plot_y + cb_h - 8, t_min_);
+
+    // Draw axes
+    SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
+    SDL_RenderDrawLine(rend, plot_x, plot_y + plot_h, plot_x + plot_w, plot_y + plot_h);  // X-axis
+    SDL_RenderDrawLine(rend, plot_x, plot_y, plot_x, plot_y + plot_h);  // Y-axis
+
+    // X-axis labels (0 and L)
+    draw_number(rend, plot_x - 5, plot_y + plot_h + 5, 0.0);
+    draw_number(rend, plot_x + plot_w - 15, plot_y + plot_h + 5, info.L);
+
+    // Y-axis labels (0 and L)
+    draw_number(rend, plot_x - 30, plot_y + plot_h - 8, 0.0);
+    draw_number(rend, plot_x - 30, plot_y - 3, info.L);
+
+    // Axis labels with U for temperature (colorbar)
+    SDL_SetRenderDrawColor(rend, 180, 180, 180, 255);
+    draw_text(rend, plot_x + plot_w / 2 - 10, plot_y + plot_h + 25, "X[M]");
+    draw_text(rend, plot_x - 30, plot_y + plot_h / 2 - 5, "Y");
+    // U label next to colorbar
+    draw_text(rend, cb_x - 5, plot_y - 12, "U[K]");
+
+    // Boundary condition labels
+    SDL_SetRenderDrawColor(rend, 150, 255, 150, 255);
+    draw_text(rend, plot_x - 5, plot_y + plot_h + 15, "N");  // Neumann at x=0, y=0
+
+    SDL_SetRenderDrawColor(rend, 255, 180, 100, 255);
+    draw_text(rend, plot_x + plot_w - 10, plot_y + plot_h + 15, "D");  // Dirichlet at x=L
+    draw_text(rend, plot_x + plot_w - 10, plot_y - 10, "D");  // Dirichlet at y=L
+
+    // Heat source regions
+    double src_x1 = 1.0/6.0, src_x2 = 2.0/6.0;
+    double src_x3 = 4.0/6.0, src_x4 = 5.0/6.0;
+    double src_y1 = 1.0/6.0, src_y2 = 2.0/6.0;
+    double src_y3 = 4.0/6.0, src_y4 = 5.0/6.0;
+
+    int sx1 = plot_x + static_cast<int>(src_x1 * plot_w);
+    int sx2 = plot_x + static_cast<int>(src_x2 * plot_w);
+    int sx3 = plot_x + static_cast<int>(src_x3 * plot_w);
+    int sx4 = plot_x + static_cast<int>(src_x4 * plot_w);
+
+    // Y flipped
+    int sy1 = plot_y + plot_h - static_cast<int>(src_y2 * plot_h);
+    int sy2 = plot_y + plot_h - static_cast<int>(src_y1 * plot_h);
+    int sy3 = plot_y + plot_h - static_cast<int>(src_y4 * plot_h);
+    int sy4 = plot_y + plot_h - static_cast<int>(src_y3 * plot_h);
+
+    // Draw dithered fill pattern for heat sources (yellow/orange dots)
+    SDL_SetRenderDrawColor(rend, 255, 200, 0, 255);
+    // Bottom-left source
+    for (int y = sy1; y < sy2; y += 4) {
+        for (int x = sx1; x < sx2; x += 4) {
+            SDL_RenderDrawPoint(rend, x, y);
+        }
+    }
+    // Bottom-right source
+    for (int y = sy1; y < sy2; y += 4) {
+        for (int x = sx3; x < sx4; x += 4) {
+            SDL_RenderDrawPoint(rend, x, y);
+        }
+    }
+    // Top-left source
+    for (int y = sy3; y < sy4; y += 4) {
+        for (int x = sx1; x < sx2; x += 4) {
+            SDL_RenderDrawPoint(rend, x, y);
+        }
+    }
+    // Top-right source
+    for (int y = sy3; y < sy4; y += 4) {
+        for (int x = sx3; x < sx4; x += 4) {
+            SDL_RenderDrawPoint(rend, x, y);
+        }
+    }
+
+    // Draw thick orange borders around heat sources
+    SDL_SetRenderDrawColor(rend, 255, 150, 0, 255);
+    SDL_Rect src_bl = {sx1, sy1, sx2 - sx1, sy2 - sy1};
+    SDL_Rect src_br = {sx3, sy1, sx4 - sx3, sy2 - sy1};
+    SDL_Rect src_tl = {sx1, sy3, sx2 - sx1, sy4 - sy3};
+    SDL_Rect src_tr = {sx3, sy3, sx4 - sx3, sy4 - sy3};
+
+    // Double border for visibility
+    SDL_RenderDrawRect(rend, &src_bl);
+    SDL_RenderDrawRect(rend, &src_br);
+    SDL_RenderDrawRect(rend, &src_tl);
+    SDL_RenderDrawRect(rend, &src_tr);
+    SDL_Rect src_bl_in = {sx1+1, sy1+1, sx2-sx1-2, sy2-sy1-2};
+    SDL_Rect src_br_in = {sx3+1, sy1+1, sx4-sx3-2, sy2-sy1-2};
+    SDL_Rect src_tl_in = {sx1+1, sy3+1, sx2-sx1-2, sy4-sy3-2};
+    SDL_Rect src_tr_in = {sx3+1, sy3+1, sx4-sx3-2, sy4-sy3-2};
+    SDL_RenderDrawRect(rend, &src_bl_in);
+    SDL_RenderDrawRect(rend, &src_br_in);
+    SDL_RenderDrawRect(rend, &src_tl_in);
+    SDL_RenderDrawRect(rend, &src_tr_in);
+
+    // Find and draw min/max temperature markers
+    int min_i = 0, min_j = 0, max_i = 0, max_j = 0;
+    double min_temp = temps[0][0], max_temp = temps[0][0];
+    for (int j = 0; j < ny; j++) {
+        for (int i = 0; i < nx; i++) {
+            if (temps[j][i] < min_temp) { min_temp = temps[j][i]; min_i = i; min_j = j; }
+            if (temps[j][i] > max_temp) { max_temp = temps[j][i]; max_i = i; max_j = j; }
+        }
+    }
+
+    // Min marker (blue circle ring)
+    int minx = plot_x + (min_i * plot_w) / nx;
+    int miny = plot_y + plot_h - (min_j * plot_h) / ny;  // Y flipped
+    SDL_SetRenderDrawColor(rend, 100, 150, 255, 255);
+    for (int dx = -4; dx <= 4; dx++) {
+        for (int dy = -4; dy <= 4; dy++) {
+            if (dx*dx + dy*dy <= 16 && dx*dx + dy*dy >= 4)
+                SDL_RenderDrawPoint(rend, minx + dx, miny + dy);
+        }
+    }
+
+    // Max marker (red circle ring)
+    int maxx = plot_x + (max_i * plot_w) / nx;
+    int maxy = plot_y + plot_h - (max_j * plot_h) / ny;  // Y flipped
+    SDL_SetRenderDrawColor(rend, 255, 100, 100, 255);
+    for (int dx = -4; dx <= 4; dx++) {
+        for (int dy = -4; dy <= 4; dy++) {
+            if (dx*dx + dy*dy <= 16 && dx*dx + dy*dy >= 4)
+                SDL_RenderDrawPoint(rend, maxx + dx, maxy + dy);
+        }
+    }
+
+    // Progress bar
+    int bar_x = cell_x + cell_w - 65;
+    int bar_y = cell_y + cell_h - 18;
+    int bar_w = 55;
+    int bar_h = 8;
+    double progress = info.time / info.tmax;
+
+
+    SDL_SetRenderDrawColor(rend, 60, 60, 60, 255);
+    SDL_Rect bar_bg = {bar_x, bar_y, bar_w, bar_h};
+    SDL_RenderFillRect(rend, &bar_bg);
+    SDL_SetRenderDrawColor(rend, 80, 180, 80, 255);
+    SDL_Rect bar_fg = {bar_x, bar_y, static_cast<int>(bar_w * progress), bar_h};
+    SDL_RenderFillRect(rend, &bar_fg);
+    SDL_SetRenderDrawColor(rend, 200, 200, 200, 255);
+    SDL_RenderDrawRect(rend, &bar_bg);
+
+    // Speed indicator
+    char speed_buf[16];
+    snprintf(speed_buf, sizeof(speed_buf), "X%d", info.speed);
+    SDL_SetRenderDrawColor(rend, 150, 200, 255, 255);
+    draw_text(rend, cell_x + cell_w - 130, cell_y + cell_h - 18, speed_buf);
+
+    // Paused indicator
+    if (info.paused) {
+        SDL_SetRenderDrawColor(rend, 255, 200, 50, 255);
+        draw_text(rend, cell_x + 5, cell_y + cell_h - 18, "PAUSED");
+    }
+
+    // Draw border
+    SDL_SetRenderDrawColor(rend, 100, 100, 100, 255);
+    SDL_Rect border = {plot_x, plot_y, plot_w, plot_h};
+    SDL_RenderDrawRect(rend, &border);
 }
 
 }

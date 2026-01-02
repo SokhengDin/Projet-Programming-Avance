@@ -17,7 +17,7 @@ namespace sdl {
  */
 struct SimInfo {
     std::string material_name;
-    double alpha;           // Thermal diffusivity [m²/s]
+    double alpha;           // Thermal diffusivity [m^2/s]
     double time;            // Current simulation time [s]
     double tmax;            // Maximum simulation time [s]
     double L;               // Domain length [m]
@@ -55,6 +55,12 @@ public:
 
     void draw_1d_fullscreen(const std::vector<double>& temps, const SimInfo& info);
     void draw_2d_fullscreen(const std::vector<std::vector<double>>& temps, const SimInfo& info);
+
+    // Grid mode: draw in a specific cell of a 2x2 grid
+    void draw_1d_cell(const std::vector<double>& temps, const SimInfo& info,
+                      int cell_x, int cell_y, int cell_w, int cell_h);
+    void draw_2d_cell(const std::vector<std::vector<double>>& temps, const SimInfo& info,
+                      int cell_x, int cell_y, int cell_w, int cell_h);
 
     double get_min() const { return t_min_; }
     double get_max() const { return t_max_; }

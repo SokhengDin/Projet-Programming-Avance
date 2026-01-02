@@ -30,6 +30,8 @@ int select_simulation_type() {
     std::cout << "----------------------\n";
     std::cout << "  1. 1D Bar\n";
     std::cout << "  2. 2D Plate\n";
+    std::cout << "  3. 1D Bar  (All 4 Materials - 2x2 Grid)\n";
+    std::cout << "  4. 2D Plate (All 4 Materials - 2x2 Grid)\n";
     std::cout << "  0. Quit\n";
     std::cout << "Choice: ";
 
@@ -117,6 +119,23 @@ bool confirm_and_start(int sim_type, int material_idx, double L, double tmax, do
     return (std::tolower(choice) == 's');
 }
 
+bool confirm_and_start_grid(int sim_type, double L, double tmax, double u0, double f) {
+    const char* sim_names[] = {"1D Bar", "2D Plate"};
+
+    std::cout << "\nCONFIGURATION (2x2 Grid - All Materials)\n";
+    std::cout << "----------------------------------------\n";
+    std::cout << "  Type:      " << sim_names[sim_type == 3 ? 0 : 1] << "\n";
+    std::cout << "  Materials: Copper, Iron, Glass, Polystyrene\n";
+    std::cout << "  L=" << L << " m, tmax=" << tmax << " s\n";
+    std::cout << "  u0=" << u0 << " C, f=" << f << " C\n\n";
+    std::cout << "Controls: SPACE=pause, R=reset, UP/DOWN=speed, ESC=quit\n\n";
+    std::cout << "[S]tart  [B]ack  [Q]uit: ";
+
+    char choice;
+    std::cin >> choice;
+    return (std::tolower(choice) == 's');
+}
+
 int main() {
     bool running = true;
 
@@ -128,46 +147,74 @@ int main() {
             std::cout << "\nExit.\n";
             break;
         }
-        if (sim_type != 1 && sim_type != 2) {
+        if (sim_type < 1 || sim_type > 4) {
             std::cout << "\nInvalid choice.\n";
             continue;
         }
 
-        int material_idx = select_material();
-        if (material_idx < 0) continue;
-
         double L = 1.0, tmax = 16.0, u0 = 13.0, f = 80.0;
-        if (!get_parameters(L, tmax, u0, f)) continue;
 
-        if (!confirm_and_start(sim_type, material_idx, L, tmax, u0, f)) continue;
+        // Grid mode (options 3 and 4)
+        if (sim_type == 3 || sim_type == 4) {
+            if (!get_parameters(L, tmax, u0, f)) continue;
+            if (!confirm_and_start_grid(sim_type, L, tmax, u0, f)) continue;
 
-        ensiie::Material material;
-        switch (material_idx) {
-            case 0: material = ensiie::Materials::COPPER; break;
-            case 1: material = ensiie::Materials::IRON; break;
-            case 2: material = ensiie::Materials::GLASS; break;
-            case 3: material = ensiie::Materials::POLYSTYRENE; break;
-            default: material = ensiie::Materials::COPPER; break;
+            std::cout << "\nStarting grid simulation...\n";
+
+            try {
+                sdl::SDLCore::init();
+
+                sdl::SDLApp::SimType type = (sim_type == 3)
+                    ? sdl::SDLApp::SimType::BAR_1D
+                    : sdl::SDLApp::SimType::PLATE_2D;
+
+                sdl::SDLApp app(type, L, tmax, u0, f);  // Grid mode constructor
+                app.run();
+
+                sdl::SDLCore::quit();
+                std::cout << "\nReturning to menu...\n";
+
+            } catch (const std::exception& e) {
+                std::cerr << "Error: " << e.what() << std::endl;
+                sdl::SDLCore::quit();
+            }
         }
+        // Single material mode (options 1 and 2)
+        else {
+            int material_idx = select_material();
+            if (material_idx < 0) continue;
 
-        std::cout << "\nStarting simulation...\n";
+            if (!get_parameters(L, tmax, u0, f)) continue;
+            if (!confirm_and_start(sim_type, material_idx, L, tmax, u0, f)) continue;
 
-        try {
-            sdl::SDLCore::init();
+            ensiie::Material material;
+            switch (material_idx) {
+                case 0: material = ensiie::Materials::COPPER; break;
+                case 1: material = ensiie::Materials::IRON; break;
+                case 2: material = ensiie::Materials::GLASS; break;
+                case 3: material = ensiie::Materials::POLYSTYRENE; break;
+                default: material = ensiie::Materials::COPPER; break;
+            }
 
-            sdl::SDLApp::SimType type = (sim_type == 1)
-                ? sdl::SDLApp::SimType::BAR_1D
-                : sdl::SDLApp::SimType::PLATE_2D;
+            std::cout << "\nStarting simulation...\n";
 
-            sdl::SDLApp app(type, material, L, tmax, u0, f);
-            app.run();
+            try {
+                sdl::SDLCore::init();
 
-            sdl::SDLCore::quit();
-            std::cout << "\nReturning to menu...\n";
+                sdl::SDLApp::SimType type = (sim_type == 1)
+                    ? sdl::SDLApp::SimType::BAR_1D
+                    : sdl::SDLApp::SimType::PLATE_2D;
 
-        } catch (const std::exception& e) {
-            std::cerr << "Error: " << e.what() << std::endl;
-            sdl::SDLCore::quit();
+                sdl::SDLApp app(type, material, L, tmax, u0, f);
+                app.run();
+
+                sdl::SDLCore::quit();
+                std::cout << "\nReturning to menu...\n";
+
+            } catch (const std::exception& e) {
+                std::cerr << "Error: " << e.what() << std::endl;
+                sdl::SDLCore::quit();
+            }
         }
     }
 

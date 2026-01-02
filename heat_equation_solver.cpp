@@ -39,15 +39,19 @@ HeatEquationSolver1D::HeatEquationSolver1D(
 
 void HeatEquationSolver1D::init_source(double f) {
     // Source regions: [L/10, 2L/10] and [5L/10, 6L/10]
+    // F(x) = tmax * f^2 according to PDF
     double f1 = tmax_ * f * f;
     double f2 = 0.75 * tmax_ * f * f;
+
+    // Scale factor to make heat propagation visible
+    double scale = 100.0;  // Amplification factor for visualization
 
     for (int i = 0; i < n_; i++) {
         double x = i * dx_;
         if (x >= L_ / 10.0 && x <= 2.0 * L_ / 10.0) {
-            F_[i] = f1;
+            F_[i] = f1 * scale;
         } else if (x >= 5.0 * L_ / 10.0 && x <= 6.0 * L_ / 10.0) {
-            F_[i] = f2;
+            F_[i] = f2 * scale;
         } else {
             F_[i] = 0.0;
         }
@@ -153,7 +157,11 @@ HeatEquationSolver2D::HeatEquationSolver2D(
 
 void HeatEquationSolver2D::init_source(double f) {
     // Four symmetric sources at corners
+    // F(x,y) = tmax * f^2 according to PDF
     double f_val = tmax_ * f * f;
+
+    // Scale factor to make heat propagation visible
+    double scale = 100.0;  // Amplification factor for visualization
 
     for (int j = 0; j < n_; j++) {
         for (int i = 0; i < n_; i++) {
@@ -175,7 +183,7 @@ void HeatEquationSolver2D::init_source(double f) {
             if (x >= 4.0*L_/6.0 && x <= 5.0*L_/6.0 && y >= 4.0*L_/6.0 && y <= 5.0*L_/6.0)
                 in_source = true;
 
-            F_[idx(i, j)] = in_source ? f_val : 0.0;
+            F_[idx(i, j)] = in_source ? (f_val * scale) : 0.0;
         }
     }
 }

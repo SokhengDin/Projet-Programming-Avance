@@ -14,8 +14,8 @@ struct Material {
     double c;            ///< Specific heat J/(kgK)
 
     /**
-     * @brief Compute thermal diffusivity α = λ/(ρc)
-     * @return Thermal diffusivity in m²/s
+     * @brief Compute thermal diffusivity
+     * @return Thermal diffusivity in m^2/s
      */
     double alpha() const { return lambda / (rho * c); }
 };
