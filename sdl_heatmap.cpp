@@ -868,7 +868,7 @@ void SDLHeatmap::draw_1d_cell(const std::vector<double>& temps, const SimInfo& i
     // Temperature value projections at key positions
     // Temperature values at: x=0 (Neumann), center of sources, x=L (Dirichlet)
     int key_indices[] = {0, n/10 + n/20, n/2 + n/20, n-1};  // x=0, src1 center, src2 center, x=L
-    const char* key_labels[] = {"", "S1", "S2", ""};
+    //const char* key_labels[] = {"", "S1", "S2", ""};
 
     for (int k = 0; k < 4; k++) {
         int idx = key_indices[k];

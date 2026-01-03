@@ -1,0 +1,199 @@
+@startuml Heat_Equation_Simulation_UML
+title Heat Equation Simulation – Class Diagram 
+
+skinparam backgroundColor #FEFEFE
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam defaultFontSize 10
+
+skinparam class {
+    BackgroundColor #FFECB3
+    BorderColor #FF9800
+    ArrowColor #37474F
+}
+
+' =====================================================
+' ENSIIE – Materials
+' =====================================================
+package "ensiie::Materials" {
+
+    struct Material <<struct>> {
+        + name : string
+        + lambda, rho, c : double
+        --
+        + alpha() : double
+    }
+}
+
+' =====================================================
+' ENSIIE – Solvers
+' =====================================================
+package "ensiie::Solvers" {
+
+    class HeatEquationSolver1D {
+        - mat_ : Material
+        - L_, tmax_, dx_, dt_, u0_, t_ : double
+        - n_ : int
+        - u_, F_ : vector<double>
+        --
+        - init_source(f : double)
+        - solve_tridiagonal(...)
+        ==
+        + HeatEquationSolver1D(...)
+        + step() : bool
+        + get_temperature() : vector<double>
+        + get_time(), get_n()
+        + reset()
+    }
+
+    class HeatEquationSolver2D {
+        - mat_ : Material
+        - L_, tmax_, dx_, dt_, u0_, t_ : double
+        - n_ : int
+        - u_, F_ : vector<double>
+        --
+        - idx(i,j) : int
+        - init_source(f : double)
+        ==
+        + HeatEquationSolver2D(...)
+        + step() : bool
+        + get_temperature(i,j)
+        + get_temperature_2d()
+        + get_time(), get_tmax()
+        + get_n(), reset()
+    }
+}
+
+' =====================================================
+' SDL – Core
+' =====================================================
+package "sdl::Core" {
+
+    class SDLException <<exception>> {
+        + SDLException(msg : string)
+    }
+
+    class SDLCore {
+        - {static} initialized_ : bool
+        ==
+        + {static} init(flag : Uint32)
+        + {static} quit()
+        + {static} poll_quit() : bool
+        + {static} delay(ms : Uint32)
+        + {static} is_initialized() : bool
+    }
+
+    SDLException --|> runtime_error
+}
+
+' =====================================================
+' SDL – Window
+' =====================================================
+package "sdl::Window" {
+
+    class SDLWindow {
+        - window_ : SDL_Window*
+        - renderer_ : SDL_Renderer*
+        - width_, height_ : int
+        - fullscreen_ : bool
+        ==
+        + SDLWindow(...)
+        + ~SDLWindow()
+        + clear(r,g,b)
+        + present()
+        + set_title(title)
+        + toggle_fullscreen()
+        + is_fullscreen() : bool
+        + get_window(), get_renderer()
+        + get_width(), get_height()
+    }
+}
+
+' =====================================================
+' SDL – Visualization
+' =====================================================
+package "sdl::Visualization" {
+
+    struct SimInfo <<struct>> {
+        + material_name : string
+        + alpha, time, tmax : double
+        + L, u0 : double
+        + speed : int
+        + paused : bool
+    }
+
+    class SDLHeatmap {
+        - win_ : SDLWindow&
+        - t_min_, t_max_ : double
+        --
+        - temp_to_rgb(...)
+        - draw_text(...)
+        - draw_grid(...)
+        - draw_info_panel(...)
+        ==
+        + SDLHeatmap(win, t_min, t_max)
+        + set_range(min,max)
+        + auto_range(data)
+        + auto_range_2d(data)
+        + draw_1d_fullscreen(...)
+        + draw_2d_fullscreen(...)
+        + draw_1d_cell(...)
+        + draw_2d_cell(...)
+        + get_min(), get_max()
+    }
+
+    SDLHeatmap ..> SimInfo
+}
+
+' =====================================================
+' SDL – Application
+' =====================================================
+package "sdl::Application" {
+
+    enum SimType {
+        BAR_1D
+        PLATE_2D
+    }
+
+    class SDLApp {
+        - window_ : unique_ptr<SDLWindow>
+        - heatmap_ : unique_ptr<SDLHeatmap>
+        - solver_1d_, solver_2d_ : unique_ptr
+        - solvers_1d_[4], solvers_2d_[4]
+        - materials_[4] : Material
+        - sim_type_ : SimType
+        - L_, tmax_, u0_, f_ : double
+        - n_, speed_ : int
+        - paused_, running_, grid_mode_ : bool
+        --
+        - render()
+        - render_grid()
+        - process_events(event)
+        - start_simulation()
+        - start_grid_simulation()
+        ==
+        + SDLApp(...)
+        + run()
+    }
+}
+
+' =====================================================
+' Relationships
+' =====================================================
+HeatEquationSolver1D *-- Material
+HeatEquationSolver2D *-- Material
+
+SDLHeatmap o-- SDLWindow
+SDLApp *-- SDLWindow
+SDLApp *-- SDLHeatmap
+
+SDLApp o-- HeatEquationSolver1D
+SDLApp o-- HeatEquationSolver2D
+SDLApp *-- Material
+
+SDLApp ..> SDLCore
+SDLApp ..> SimType
+SDLWindow ..> SDLException
+SDLCore ..> SDLException
+
+@enduml

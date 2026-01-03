@@ -1,3 +1,4 @@
+scale 0.8
 @startuml Heat_Equation_Simulation_UML
 
 !define ENTITY class
