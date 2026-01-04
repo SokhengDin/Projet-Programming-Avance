@@ -1,27 +1,28 @@
 <map id="sdl::draw_digit" name="sdl::draw_digit">
-<area shape="rect" id="Node000001" title=" " alt="" coords="662,218,768,244"/>
-<area shape="rect" id="Node000002" href="$classsdl_1_1_s_d_l_heatmap.html#a0b9fb36b9fafa26b4ba4725b8d985cd9" title=" " alt="" coords="438,242,600,283"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="644,242,601,252,600,247,649,241"/>
-<area shape="rect" id="Node000008" href="$classsdl_1_1_s_d_l_heatmap.html#ac4eb50b210494fc3432db40a0071ceed" title=" " alt="" coords="424,129,614,154"/>
-<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="668,211,549,158,550,152,674,211"/>
-<area shape="rect" id="Node000003" href="$classsdl_1_1_s_d_l_heatmap.html#aeb321d70a2b70a27bab7bbecb1b1216b" title=" " alt="" coords="215,214,376,255"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="421,251,377,248,376,242,426,250"/>
-<area shape="rect" id="Node000004" href="$classsdl_1_1_s_d_l_heatmap.html#afc7885cf33b3281b986e3012a277160b" title=" " alt="" coords="5,214,167,255"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="494,294,443,345,412,367,377,384,332,399,295,404,257,400,213,384,173,358,139,323,113,287,97,258,98,253,118,284,143,320,176,353,216,379,259,395,294,399,331,393,375,379,409,362,440,341,489,296"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="662,222,768,247"/>
+<area shape="rect" id="Node000002" href="$classsdl_1_1_s_d_l_heatmap.html#a0b9fb36b9fafa26b4ba4725b8d985cd9" title=" " alt="" coords="438,246,600,287"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="644,246,601,256,600,251,649,245"/>
+<area shape="rect" id="Node000008" href="$classsdl_1_1_s_d_l_heatmap.html#ac4eb50b210494fc3432db40a0071ceed" title=" " alt="" coords="424,156,614,182"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="657,217,560,185,560,180,662,216"/>
+<area shape="rect" id="Node000003" href="$classsdl_1_1_s_d_l_heatmap.html#aeb321d70a2b70a27bab7bbecb1b1216b" title=" " alt="" coords="215,280,376,320"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="421,281,377,290,376,285,426,280"/>
+<area shape="rect" id="Node000004" href="$classsdl_1_1_s_d_l_heatmap.html#afc7885cf33b3281b986e3012a277160b" title=" " alt="" coords="5,64,167,104"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="478,295,419,328,351,353,314,359,279,360,244,352,213,334,193,313,183,291,179,269,180,246,182,197,177,172,164,147,145,125,125,107,124,102,149,121,169,144,182,171,187,197,186,246,185,268,188,290,197,310,216,330,246,347,279,354,314,354,349,348,417,323,472,296"/>
 <area shape="rect" id="Node000005" href="$classsdl_1_1_s_d_l_heatmap.html#a4f0cc9ea87a260bc10ebfc6b2c9fd6bf" title=" " alt="" coords="215,149,376,190"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="452,236,375,205,347,193,347,188,377,200,457,236"/>
-<area shape="rect" id="Node000006" href="$classsdl_1_1_s_d_l_heatmap.html#ae17c83b550b2baac23518b89c6512611" title=" " alt="" coords="5,92,167,132"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="420,286,373,294,319,295,265,287,213,269,195,256,185,240,177,223,165,204,106,136,107,130,169,201,181,221,189,238,199,252,216,264,266,282,320,289,373,289,426,285"/>
-<area shape="rect" id="Node000007" href="$classsdl_1_1_s_d_l_heatmap.html#a9eccaaefe82bc20e222c36d6b93e80af" title=" " alt="" coords="215,329,376,370"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="453,289,351,331,349,326,448,290"/>
-<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="233,322,213,313,120,258,121,253,216,308,239,322"/>
-<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="223,320,213,313,193,285,185,260,178,234,164,204,136,166,109,136,109,130,140,163,169,201,183,232,190,258,198,283,217,309,228,320"/>
-<area shape="poly" id="edge10_Node000008_Node000003" title=" " alt="" coords="470,162,377,204,348,216,345,211,375,199,475,160"/>
-<area shape="poly" id="edge11_Node000008_Node000004" title=" " alt="" coords="433,127,384,123,329,122,271,127,216,140,183,155,154,175,108,216,104,212,151,170,181,150,214,135,270,122,328,117,385,118,438,125"/>
-<area shape="poly" id="edge12_Node000008_Node000005" title=" " alt="" coords="406,156,377,162,376,157,411,154"/>
-<area shape="poly" id="edge13_Node000008_Node000006" title=" " alt="" coords="495,117,445,68,412,43,375,25,331,12,296,8,260,13,216,25,185,38,156,56,110,93,106,90,153,52,182,34,214,20,259,8,296,3,333,7,377,20,415,39,449,64,501,117"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="456,240,375,205,347,193,347,188,377,200,461,239"/>
+<area shape="rect" id="Node000006" href="$classsdl_1_1_s_d_l_heatmap.html#ae17c83b550b2baac23518b89c6512611" title=" " alt="" coords="5,157,167,198"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="492,297,441,343,410,363,377,378,332,393,294,400,256,396,213,378,188,361,166,339,130,290,105,239,93,200,94,195,110,237,135,287,170,336,191,357,216,374,258,391,293,395,330,388,375,373,408,359,438,339,487,299"/>
+<area shape="rect" id="Node000007" href="$classsdl_1_1_s_d_l_heatmap.html#a9eccaaefe82bc20e222c36d6b93e80af" title=" " alt="" coords="215,214,376,255"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="421,253,377,249,376,243,426,252"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="219,207,213,203,197,189,188,176,165,147,117,107,117,102,169,143,192,173,201,186,216,199,225,206"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="202,211,163,201,162,196,207,209"/>
+<area shape="poly" id="edge10_Node000008_Node000003" title=" " alt="" coords="489,190,377,269,352,281,350,276,375,264,484,192"/>
+<area shape="poly" id="edge11_Node000008_Node000004" title=" " alt="" coords="500,143,479,115,450,81,415,49,375,25,332,11,297,9,261,15,215,25,165,43,122,65,118,61,163,38,214,20,260,9,297,3,333,6,377,20,419,45,454,77,483,111,505,144"/>
+<area shape="poly" id="edge12_Node000008_Node000005" title=" " alt="" coords="406,170,377,172,376,167,411,168"/>
+<area shape="poly" id="edge13_Node000008_Node000006" title=" " alt="" coords="453,153,376,140,295,133,215,140,142,159,140,154,214,135,295,128,376,135,458,151"/>
+<area shape="poly" id="edge14_Node000008_Node000007" title=" " alt="" coords="456,188,369,216,367,211,461,186"/>
 <area shape="rect" id="Node000009" href="$classsdl_1_1_s_d_l_heatmap.html#afb950bdd4b18f9356775188a8af3b56a" title=" " alt="" coords="215,34,376,75"/>
-<area shape="poly" id="edge14_Node000008_Node000009" title=" " alt="" coords="467,123,350,78,350,73,472,122"/>
-<area shape="poly" id="edge15_Node000009_Node000004" title=" " alt="" coords="229,85,216,95,169,145,107,216,103,212,165,142,213,91,232,81"/>
-<area shape="poly" id="edge16_Node000009_Node000006" title=" " alt="" coords="202,82,164,93,161,89,206,78"/>
+<area shape="poly" id="edge15_Node000008_Node000009" title=" " alt="" coords="477,149,375,96,341,78,340,73,377,91,483,148"/>
+<area shape="poly" id="edge16_Node000009_Node000004" title=" " alt="" coords="197,70,168,75,166,70,201,66"/>
+<area shape="poly" id="edge17_Node000009_Node000006" title=" " alt="" coords="233,84,216,96,118,158,115,154,213,91,237,80"/>
 </map>

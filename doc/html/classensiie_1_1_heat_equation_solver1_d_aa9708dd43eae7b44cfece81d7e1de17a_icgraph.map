@@ -1,5 +1,5 @@
 <map id="ensiie::HeatEquationSolver1D::solve_tridiagonal" name="ensiie::HeatEquationSolver1D::solve_tridiagonal">
-<area shape="rect" id="Node000001" title=" " alt="" coords="240,5,426,46"/>
-<area shape="rect" id="Node000002" href="$classensiie_1_1_heat_equation_solver1_d.html#a87794e70ebd3eaff471f75383c593ab4" title=" " alt="" coords="5,5,192,46"/>
+<area shape="rect" id="Node000001" title="Thomas algorithm (TDMA) for tridiagonal system Complexity: O(n)." alt="" coords="240,5,426,46"/>
+<area shape="rect" id="Node000002" href="$classensiie_1_1_heat_equation_solver1_d.html#a87794e70ebd3eaff471f75383c593ab4" title="Advance one time step using implicit scheme." alt="" coords="5,5,192,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="222,26,192,28,192,23,227,25"/>
 </map>

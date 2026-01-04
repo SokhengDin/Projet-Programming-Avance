@@ -1,6 +1,6 @@
 <map id="ensiie::HeatEquationSolver2D::HeatEquationSolver2D" name="ensiie::HeatEquationSolver2D::HeatEquationSolver2D">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,192,46"/>
-<area shape="rect" id="Node000002" href="$classensiie_1_1_heat_equation_solver2_d.html#a7bb7fd4d1f7df9652c476ee141e04fd1" title=" " alt="" coords="240,5,426,46"/>
+<area shape="rect" id="Node000001" title="Init 2D solver on square domain [0,L]²" alt="" coords="5,5,192,46"/>
+<area shape="rect" id="Node000002" href="$classensiie_1_1_heat_equation_solver2_d.html#a7bb7fd4d1f7df9652c476ee141e04fd1" title="Setup 4 symmetric heat sources at corners F = tmax·f² on [L/6, 2L/6]² and [4L/6, 5L/6]² regions." alt="" coords="240,5,426,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,23,227,25,221,26,192,28"/>
 <area shape="rect" id="Node000003" href="$classensiie_1_1_heat_equation_solver2_d.html#a085170175a5b84b1f1ae569e08778a5e" title=" " alt="" coords="474,5,660,46"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="426,23,461,26,456,26,426,28"/>

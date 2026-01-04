@@ -1,5 +1,5 @@
 <map id="ensiie::HeatEquationSolver1D::HeatEquationSolver1D" name="ensiie::HeatEquationSolver1D::HeatEquationSolver1D">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,192,46"/>
-<area shape="rect" id="Node000002" href="$classensiie_1_1_heat_equation_solver1_d.html#abe76f12ec2765aa0796aff79d5b9f863" title=" " alt="" coords="240,5,426,46"/>
+<area shape="rect" id="Node000001" title="Init 1D solver for heat equation." alt="" coords="5,5,192,46"/>
+<area shape="rect" id="Node000002" href="$classensiie_1_1_heat_equation_solver1_d.html#abe76f12ec2765aa0796aff79d5b9f863" title="Setup heat sources F(x) F = tmax·f² on [L/10, 2L/10] and [5L/10, 6L/10]." alt="" coords="240,5,426,46"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,23,227,25,221,26,192,28"/>
 </map>

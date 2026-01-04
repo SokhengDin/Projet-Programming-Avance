@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title="Setup 4 symmetric heat sources at corners F = tmax·f² on [L/6, 2L/6]² and [4L/6, 5L/6]² regions.">
 <polygon fill="#999999" stroke="#666666" points="139.75,-30.5 0,-30.5 0,0 139.75,0 139.75,-30.5"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-17" font-family="Helvetica,sans-Serif" font-size="10.00">ensiie::HeatEquationSolver2</text>
 <text xml:space="preserve" text-anchor="middle" x="69.88" y="-5.75" font-family="Helvetica,sans-Serif" font-size="10.00">D::init_source</text>
