@@ -1,9 +1,0 @@
-<map id="heat_equation_solver.hpp" name="heat_equation_solver.hpp">
-<area shape="rect" id="Node000001" title="1D and 2D Heat Equation Solvers &#45; Implicit Finite Differences" alt="" coords="17,5,185,31"/>
-<area shape="rect" id="Node000002" href="$material_8hpp.html" title=" " alt="" coords="5,79,98,105"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,34,71,68,66,65,94,29"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="122,79,179,105"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="110,29,136,66,131,67,108,34"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="25,153,78,178"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="53,103,54,137,49,136,50,107"/>
-</map>

@@ -1,29 +1,21 @@
 /**
  * @file heat_equation_solver.cpp
- * @brief Implementation of 1D/2D heat equation solvers
+ * @brief Implementation of implicit heat equation solvers (1D and 2D).
  */
 
 #include "heat_equation_solver.hpp"
 #include <cmath>
 #include <algorithm>
 
+/// Conversion from Celsius to Kelvin
 constexpr double KELVIN_OFFSET = 273.15;
 
 namespace ensiie {
 
 // =============================================================================
-// 1D SOLVER
+// 1D SOLVER IMPLEMENTATION
 // =============================================================================
 
-/**
- * @brief Init 1D solver for heat equation
- * @param mat Material (λ, ρ, c)
- * @param L Domain [0, L]
- * @param tmax Simulation time
- * @param u0 Initial temp (°C)
- * @param f Source amplitude
- * @param n Grid points
- */
 HeatEquationSolver1D::HeatEquationSolver1D(
     const Material& mat,
     double L,
@@ -46,10 +38,6 @@ HeatEquationSolver1D::HeatEquationSolver1D(
     init_source(f);
 }
 
-/**
- * @brief Setup heat sources F(x)
- * F = tmax·f² on [L/10, 2L/10] and [5L/10, 6L/10]
- */
 void HeatEquationSolver1D::init_source(double f) {
     // Source regions: [L/10, 2L/10] and [5L/10, 6L/10]
     // F(x) = tmax * f^2 according to PDF
@@ -71,10 +59,6 @@ void HeatEquationSolver1D::init_source(double f) {
     }
 }
 
-/**
- * @brief Advance one time step using implicit scheme
- * @return false if t >= tmax
- */
 bool HeatEquationSolver1D::step() {
     if (t_ >= tmax_) return false;
 
@@ -93,11 +77,11 @@ bool HeatEquationSolver1D::step() {
         d[i] = u_[i] + coef * F_[i];
     }
 
-    // Neumann BC at x=0
+    // Neumann boundary condition at x = 0
     b[0] = 1.0 + r;
     c[0] = -r;
 
-    // Dirichlet BC at x=L
+    // Dirichlet boundary condition at x = L
     b[n_ - 1] = 1.0;
     a[n_ - 1] = 0.0;
     c[n_ - 1] = 0.0;
@@ -111,17 +95,14 @@ bool HeatEquationSolver1D::step() {
     return true;
 }
 
-/**
- * @brief Thomas algorithm (TDMA) for tridiagonal system
- * Complexity: O(n)
- */
 void HeatEquationSolver1D::solve_tridiagonal(
     const std::vector<double>& a,
     const std::vector<double>& b,
     const std::vector<double>& c,
     std::vector<double>& d,
     std::vector<double>& x
-) {
+) 
+{
     // Thomas algorithm (TDMA)
     int n = static_cast<int>(b.size());
     std::vector<double> c_prime(n);
@@ -144,9 +125,6 @@ void HeatEquationSolver1D::solve_tridiagonal(
     }
 }
 
-/**
- * @brief Reset to initial state (t=0, u=u0)
- */
 void HeatEquationSolver1D::reset() {
     t_ = 0.0;
     std::fill(u_.begin(), u_.end(), u0_kelvin_);
@@ -154,18 +132,9 @@ void HeatEquationSolver1D::reset() {
 
 
 // =============================================================================
-// 2D SOLVER
+// 2D SOLVER IMPLEMENTATION
 // =============================================================================
 
-/**
- * @brief Init 2D solver on square domain [0,L]²
- * @param mat Material (λ, ρ, c)
- * @param L Domain side length
- * @param tmax Simulation time
- * @param u0 Initial temp (°C)
- * @param f Source amplitude
- * @param n Grid points per dimension
- */
 HeatEquationSolver2D::HeatEquationSolver2D(
     const Material& mat,
     double L,
@@ -188,10 +157,6 @@ HeatEquationSolver2D::HeatEquationSolver2D(
     init_source(f);
 }
 
-/**
- * @brief Setup 4 symmetric heat sources at corners
- * F = tmax·f² on [L/6, 2L/6]² and [4L/6, 5L/6]² regions
- */
 void HeatEquationSolver2D::init_source(double f) {
     // Four symmetric sources at corners
     // F(x,y) = tmax * f^2 according to PDF
@@ -225,10 +190,6 @@ void HeatEquationSolver2D::init_source(double f) {
     }
 }
 
-/**
- * @brief Advance one step using Gauss-Seidel iteration
- * @return false if t >= tmax
- */
 bool HeatEquationSolver2D::step() {
     if (t_ >= tmax_) return false;
 
@@ -277,9 +238,6 @@ bool HeatEquationSolver2D::step() {
     return true;
 }
 
-/**
- * @brief Convert row-major storage to 2D array [j][i]
- */
 std::vector<std::vector<double>> HeatEquationSolver2D::get_temperature_2d() const {
     std::vector<std::vector<double>> result(n_, std::vector<double>(n_));
     for (int j = 0; j < n_; j++) {
@@ -290,9 +248,6 @@ std::vector<std::vector<double>> HeatEquationSolver2D::get_temperature_2d() cons
     return result;
 }
 
-/**
- * @brief Reset to initial state (t=0, u=u0)
- */
 void HeatEquationSolver2D::reset() {
     t_ = 0.0;
     std::fill(u_.begin(), u_.end(), u0_kelvin_);

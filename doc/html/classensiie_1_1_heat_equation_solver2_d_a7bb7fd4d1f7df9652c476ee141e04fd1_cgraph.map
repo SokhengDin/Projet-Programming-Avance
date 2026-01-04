@@ -1,5 +1,0 @@
-<map id="ensiie::HeatEquationSolver2D::init_source" name="ensiie::HeatEquationSolver2D::init_source">
-<area shape="rect" id="Node000001" title="Setup 4 symmetric heat sources at corners F = tmax·f² on [L/6, 2L/6]² and [4L/6, 5L/6]² regions." alt="" coords="5,5,192,46"/>
-<area shape="rect" id="Node000002" href="$classensiie_1_1_heat_equation_solver2_d.html#a085170175a5b84b1f1ae569e08778a5e" title=" " alt="" coords="240,5,426,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,23,227,25,221,26,192,28"/>
-</map>

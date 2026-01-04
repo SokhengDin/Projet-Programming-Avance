@@ -1,7 +1,0 @@
-<map id="sdl_window.hpp" name="sdl_window.hpp">
-<area shape="rect" id="Node000001" title="SDL2 window and renderer wrapper." alt="" coords="18,5,131,31"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,64,105"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,30,51,67,46,64,66,33"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="88,79,141,105"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="82,29,103,65,98,66,80,34"/>
-</map>

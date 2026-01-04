@@ -1,6 +1,6 @@
 /**
  * @file sdl_core.cpp
- * @brief SDL2 initialization implementation
+ * @brief Implementation of SDL2 core utilities.
  */
 
 #include "sdl_core.hpp"

@@ -23,7 +23,12 @@ namespace sdl {
  */
 class SDLApp {
 public:
-    enum class SimType { BAR_1D, PLATE_2D };
+    /**
+     * @brief Type of simulation
+     */
+    enum class SimType { 
+        BAR_1D,       ///< 1D heat equation (bar)
+        PLATE_2D };   ///< 2D heat equation (plate)
 
 private:
     std::unique_ptr<SDLWindow> window_;
@@ -31,19 +36,19 @@ private:
     std::unique_ptr<ensiie::HeatEquationSolver1D> solver_1d_;
     std::unique_ptr<ensiie::HeatEquationSolver2D> solver_2d_;
 
-    SimType sim_type_;
-    ensiie::Material material_;
+    SimType sim_type_;           ///< Simulation type
+    ensiie::Material material_;  ///< Selected material
 
-    double L_;
-    double tmax_;
-    double u0_;
-    double f_;
-    int n_;
+    double L_;       ///< Domain size
+    double tmax_;    ///< Maximum simulation time
+    double u0_;      ///< Initial temperature
+    double f_;       ///< Source intensity
+    int n_;          ///< Grid resolution
 
-    bool paused_;
-    int speed_;
-    bool running_;
-    bool grid_mode_;  // 2x2 grid mode for all materials
+    bool paused_;    ///< Pause state
+    int speed_;      ///< Simulation speed
+    bool running_;   ///< Application state
+    bool grid_mode_; ///< Multi-material grid mode
 
     // For grid mode: 4 solvers (one per material)
     std::unique_ptr<ensiie::HeatEquationSolver1D> solvers_1d_[4];
@@ -57,7 +62,9 @@ private:
     void start_grid_simulation();
 
 public:
-    // Single material mode
+    /**
+     * @brief Create application for single material simulation
+     */
     SDLApp(
         SimType type,
         const ensiie::Material& mat,
@@ -67,7 +74,9 @@ public:
         double f
     );
 
-    // Grid mode: all 4 materials
+    /**
+     * @brief Create application in grid mode (all materials)
+     */
     SDLApp(
         SimType type,
         double L,
@@ -76,6 +85,9 @@ public:
         double f
     );
 
+    /**
+     * @brief Run the application main loop
+     */
     void run();
 };
 

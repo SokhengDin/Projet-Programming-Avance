@@ -1,0 +1,221 @@
+@startuml Heat_Equation_Simulation_UML
+
+' Title and styling
+title Diagramme de Classes - Simulation de l'Équation de la Chaleur
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FEFEFE
+skinparam shadowing false
+skinparam class {
+    BackgroundColor<<struct>> LightYellow
+    BorderColor<<struct>> Orange
+    BackgroundColor<<exception>> LightPink
+    BorderColor<<exception>> Red
+    BackgroundColor Wheat
+    BorderColor Brown
+    ArrowColor DarkSlateGray
+    FontSize 11
+}
+
+package "ensiie" <<Namespace>> {
+    
+    package "Materials" {
+        struct Material <<struct>> {
+            + name: string
+            + lambda: double
+            + rho: double
+            + c: double
+            --
+            + alpha(): double
+        }
+    }
+    
+    package "Solvers" {
+        class HeatEquationSolver1D {
+            - mat_: Material
+            - L_: double
+            - tmax_: double
+            - dx_: double
+            - dt_: double
+            - u0_kelvin_: double
+            - t_: double
+            - n_: int
+            - u_: vector<double>
+            - F_: vector<double>
+            --
+            - init_source(f: double): void
+            - solve_tridiagonal(...): void
+            ==
+            + HeatEquationSolver1D(...)
+            + step(): bool
+            + get_temperature(): vector<double>
+            + get_time(): double
+            + get_n(): int
+            + reset(): void
+        }
+
+        class HeatEquationSolver2D {
+            - mat_: Material
+            - L_: double
+            - tmax_: double
+            - dx_: double
+            - dt_: double
+            - u0_kelvin_: double
+            - t_: double
+            - n_: int
+            - u_: vector<double>
+            - F_: vector<double>
+            --
+            - idx(i: int, j: int): int
+            - init_source(f: double): void
+            ==
+            + HeatEquationSolver2D(...)
+            + step(): bool
+            + get_temperature(i, j): double
+            + get_temperature_2d(): vector<vector<double>>
+            + get_time(): double
+            + get_tmax(): double
+            + get_n(): int
+            + reset(): void
+        }
+    }
+}
+
+package "sdl" <<Namespace>> {
+    
+    package "Core" {
+        class SDLException <<exception>> {
+            + SDLException(msg: string)
+        }
+
+        class SDLCore {
+            - {static} initialized_: bool
+            ==
+            + {static} init(flag: Uint32): void
+            + {static} quit(): void
+            + {static} poll_quit(): bool
+            + {static} delay(ms: Uint32): void
+            + {static} is_initialized(): bool
+        }
+    }
+    
+    package "Window" {
+        class SDLWindow {
+            - window_: SDL_Window*
+            - renderer_: SDL_Renderer*
+            - width_: int
+            - height_: int
+            - fullscreen_: bool
+            ==
+            + SDLWindow(title, width, height, fullscreen)
+            + ~SDLWindow()
+            + clear(r, g, b): void
+            + present(): void
+            + set_title(title): void
+            + toggle_fullscreen(): void
+            + is_fullscreen(): bool
+            + get_window(): SDL_Window*
+            + get_renderer(): SDL_Renderer*
+            + get_width(): int
+            + get_height(): int
+        }
+    }
+    
+    package "Visualization" {
+        struct SimInfo <<struct>> {
+            + material_name: string
+            + alpha: double
+            + time: double
+            + tmax: double
+            + L: double
+            + u0: double
+            + speed: int
+            + paused: bool
+        }
+
+        class SDLHeatmap {
+            - win_: SDLWindow&
+            - t_min_: double
+            - t_max_: double
+            --
+            - temp_to_rgb(t, r, g, b): void
+            - draw_number(...): void
+            - draw_text(...): void
+            - draw_colorbar(...): void
+            - draw_info_panel(...): void
+            - draw_grid(...): void
+            ==
+            + SDLHeatmap(win, t_min, t_max)
+            + set_range(t_min, t_max): void
+            + auto_range(temps): void
+            + auto_range_2d(temps): void
+            + draw_1d_fullscreen(...): void
+            + draw_2d_fullscreen(...): void
+            + draw_1d_cell(...): void
+            + draw_2d_cell(...): void
+            + get_min(): double
+            + get_max(): double
+        }
+    }
+    
+    package "Application" {
+        enum SimType {
+            BAR_1D
+            PLATE_2D
+        }
+
+        class SDLApp {
+            - window_: unique_ptr<SDLWindow>
+            - heatmap_: unique_ptr<SDLHeatmap>
+            - solver_1d_: unique_ptr<HeatEquationSolver1D>
+            - solver_2d_: unique_ptr<HeatEquationSolver2D>
+            - sim_type_: SimType
+            - material_: Material
+            - L_: double
+            - tmax_: double
+            - u0_: double
+            - f_: double
+            - n_: int
+            - paused_: bool
+            - speed_: int
+            - running_: bool
+            - grid_mode_: bool
+            - solvers_1d_[4]: unique_ptr<HeatEquationSolver1D>
+            - solvers_2d_[4]: unique_ptr<HeatEquationSolver2D>
+            - materials_[4]: Material
+            --
+            - render(): void
+            - render_grid(): void
+            - process_events(event): void
+            - start_simulation(): void
+            - start_grid_simulation(): void
+            ==
+            + SDLApp(type, mat, ...)
+            + SDLApp(type, L, ...)
+            + run(): void
+        }
+    }
+}
+
+' Relationships
+HeatEquationSolver1D *-- Material
+HeatEquationSolver2D *-- Material
+
+SDLApp *-- "1" SDLWindow
+SDLApp *-- "1" SDLHeatmap
+SDLApp *-- "0..1" HeatEquationSolver1D
+SDLApp *-- "0..1" HeatEquationSolver2D
+SDLApp o-- "4" HeatEquationSolver1D
+SDLApp o-- "4" HeatEquationSolver2D
+SDLApp *-- "4" Material
+
+SDLHeatmap o-- SDLWindow
+SDLHeatmap ..> SimInfo
+
+SDLApp ..> SDLCore
+SDLApp ..> SimType
+SDLWindow ..> SDLException
+SDLCore ..> SDLException
+
+SDLException -up-|> runtime_error
+
+@enduml
